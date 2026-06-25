@@ -91,6 +91,22 @@ export async function POST(request: Request) {
     ]);
 
     await writeProfileCache(username, profile, prs, issues);
+
+    // Regenerate the global summary caches locally so the leaderboard is immediately updated
+    try {
+      const flaggedPRIds = await getFlaggedPRIdSet();
+      const periods = ['all', 'week', 'month'];
+      for (const p of periods) {
+        const dateQuery = buildDateQuery(p);
+        const summaries = await getAllStudentSummaries(dateQuery, flaggedPRIds, false);
+        await writeSummaryCache(summaries, p);
+      }
+      revalidatePath('/contributors');
+      revalidatePath('/');
+    } catch (err) {
+      console.error('Failed to update summary caches after individual refresh:', err);
+    }
+
     revalidatePath(`/contributors/${username}`);
 
     return Response.json({

@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-18T12:18:01.654Z",
+    "cachedAt": "2026-06-25T09:40:47.487Z",
     "profile": {
       "login": "awantika-m",
       "id": 227009544,
@@ -34,7 +34,7 @@
       "followers": 0,
       "following": 0,
       "created_at": "2025-08-17T13:37:51Z",
-      "updated_at": "2026-06-05T07:47:15Z"
+      "updated_at": "2026-06-21T18:51:14Z"
     },
     "prs": [
       {
@@ -1506,5 +1506,5 @@
     ],
     "issues": []
   },
-  "expiresAt": 1784377081654
+  "expiresAt": 1784972447487
 }

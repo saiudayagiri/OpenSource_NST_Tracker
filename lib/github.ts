@@ -72,6 +72,33 @@ async function githubSearch<T>(
   return res.json();
 }
 
+async function githubSearchAll<T>(
+  q: string
+): Promise<{ total_count: number; items: T[] } | null> {
+  const allItems: T[] = [];
+  let page = 1;
+  const maxPages = GITHUB_TOKEN ? 10 : 3;
+  let totalCount = 0;
+
+  while (page <= maxPages) {
+    const data = await githubSearch<T>(q, page, 100);
+    if (!data) {
+      if (page === 1) return null;
+      break;
+    }
+    totalCount = data.total_count;
+    allItems.push(...data.items);
+    if (allItems.length >= data.total_count || data.items.length < 100) break;
+    page++;
+    if (page <= maxPages) {
+      await new Promise((r) => setTimeout(r, GITHUB_TOKEN ? 200 : 1000));
+    }
+  }
+
+  return { total_count: totalCount, items: allItems };
+}
+
+
 export interface StudentPR {
   id: number;
   number: number;
@@ -381,19 +408,22 @@ export async function getAllStudentSummaries(
 
   // ── Phase 1: Resolve from individual profile caches (zero API calls) ──
   if (!forceLive) {
-    for (const student of students) {
-      try {
-        const cached = await readProfileCache(student.github);
-        if (cached) {
-          const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
-          if (summary.totalPRs > 0 || summary.issuesCount > 0) {
-            summaries.push(summary);
-          }
-          // Student resolved from cache — skip live API even if 0 contributions in range
-        } else {
-          uncachedStudents.push(student);
+    const cachedResults = await Promise.all(
+      students.map(async (student) => {
+        try {
+          const cached = await readProfileCache(student.github);
+          return { student, cached };
+        } catch {
+          return { student, cached: null };
         }
-      } catch {
+      })
+    );
+
+    for (const { student, cached } of cachedResults) {
+      if (cached) {
+        const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        summaries.push(summary);
+      } else {
         uncachedStudents.push(student);
       }
     }
@@ -426,8 +456,8 @@ export async function getAllStudentSummaries(
     const issueQuery = `is:issue ${authorQuery}${dateQuery ? ' ' + dateQuery : ''}`;
 
     const results = await Promise.allSettled([
-      githubSearch<StudentPR>(prQuery, 1, 100),
-      githubSearch<StudentIssue>(issueQuery, 1, 100),
+      githubSearchAll<StudentPR>(prQuery),
+      githubSearchAll<StudentIssue>(issueQuery),
     ]);
 
     let batchRateLimited = false;
@@ -452,8 +482,8 @@ export async function getAllStudentSummaries(
       await new Promise((r) => setTimeout(r, 65_000));
 
       const retry = await Promise.allSettled([
-        githubSearch<StudentPR>(prQuery, 1, 100),
-        githubSearch<StudentIssue>(issueQuery, 1, 100),
+        githubSearchAll<StudentPR>(prQuery),
+        githubSearchAll<StudentIssue>(issueQuery),
       ]);
 
       if (retry[0].status === 'fulfilled' && retry[0].value?.items) {
@@ -500,7 +530,7 @@ export async function getAllStudentSummaries(
     const prs = studentPRMap.get(lowerName) || [];
     const issues = studentIssueMap.get(lowerName) || [];
 
-    if (prs.length === 0 && issues.length === 0) continue;
+
 
     // Resolve profile (cache → live → placeholder)
     let profile: GitHubUser | null = null;
@@ -589,4 +619,54 @@ export function buildDateQuery(period: string, from?: string, to?: string): stri
       return '';
     default: return '';
   }
+}
+
+export async function refreshStudentCache(username: string): Promise<void> {
+  console.log(`Refreshing cache for user: ${username}`);
+  const profile = await getStudentProfile(username);
+  if (!profile) {
+    throw new Error(`Profile not found for user: ${username}`);
+  }
+  const prs = await getStudentPRs(username);
+  const issues = await getStudentIssues(username);
+  await writeProfileCache(username, profile, prs, issues);
+}
+
+export async function updateStaleProfiles(batchSize = 5): Promise<string[]> {
+  const students = await getStudentsKV();
+  if (students.length === 0) return [];
+
+  // Read all caches in parallel to find timestamps
+  const studentCaches = await Promise.all(
+    students.map(async (student) => {
+      try {
+        const cached = await readProfileCache(student.github);
+        return {
+          student,
+          cachedAt: cached ? new Date(cached.cachedAt).getTime() : 0,
+        };
+      } catch {
+        return { student, cachedAt: 0 };
+      }
+    })
+  );
+
+  // Sort by cachedAt (oldest or un-cached first)
+  studentCaches.sort((a, b) => a.cachedAt - b.cachedAt);
+
+  const targets = studentCaches.slice(0, batchSize);
+  const updatedUsernames: string[] = [];
+
+  for (const target of targets) {
+    try {
+      await refreshStudentCache(target.student.github);
+      updatedUsernames.push(target.student.github);
+      // Wait 1.5 seconds between students to respect GitHub Search rate limits
+      await new Promise((r) => setTimeout(r, 1500));
+    } catch (err) {
+      console.error(`Failed to refresh cache for ${target.student.github}:`, err);
+    }
+  }
+
+  return updatedUsernames;
 }

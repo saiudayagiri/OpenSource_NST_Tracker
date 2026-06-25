@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.708Z",
+    "profile": {
+      "login": "preetk25627-dotcom",
+      "id": 226967795,
+      "node_id": "U_kgDODYdA8w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/226967795?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/preetk25627-dotcom",
+      "html_url": "https://github.com/preetk25627-dotcom",
+      "followers_url": "https://api.github.com/users/preetk25627-dotcom/followers",
+      "following_url": "https://api.github.com/users/preetk25627-dotcom/following{/other_user}",
+      "gists_url": "https://api.github.com/users/preetk25627-dotcom/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/preetk25627-dotcom/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/preetk25627-dotcom/subscriptions",
+      "organizations_url": "https://api.github.com/users/preetk25627-dotcom/orgs",
+      "repos_url": "https://api.github.com/users/preetk25627-dotcom/repos",
+      "events_url": "https://api.github.com/users/preetk25627-dotcom/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/preetk25627-dotcom/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Preet Kalra",
+      "company": null,
+      "blog": "https://www.instagram.com/preettkalra/?hl=en",
+      "location": "India",
+      "email": "preet.k25627@nst.rishihood.edu.in",
+      "hireable": null,
+      "bio": "I’m a curious and driven first-year B.Tech student in Computer Science, passionate about exploring how technology works beneath the surface. I enjoy building si",
+      "twitter_username": null,
+      "public_repos": 25,
+      "public_gists": 0,
+      "followers": 1,
+      "following": 0,
+      "created_at": "2025-08-17T07:08:21Z",
+      "updated_at": "2026-04-18T06:29:02Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030708
+}

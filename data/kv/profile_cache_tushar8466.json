@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:59:35.495Z",
+    "profile": {
+      "login": "Tushar8466",
+      "id": 230115377,
+      "node_id": "U_kgDODbdIMQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/230115377?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Tushar8466",
+      "html_url": "https://github.com/Tushar8466",
+      "followers_url": "https://api.github.com/users/Tushar8466/followers",
+      "following_url": "https://api.github.com/users/Tushar8466/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Tushar8466/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Tushar8466/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Tushar8466/subscriptions",
+      "organizations_url": "https://api.github.com/users/Tushar8466/orgs",
+      "repos_url": "https://api.github.com/users/Tushar8466/repos",
+      "events_url": "https://api.github.com/users/Tushar8466/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Tushar8466/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Tushar",
+      "company": null,
+      "blog": "https://redesigned-journey-delta.vercel.app/",
+      "location": "Pune , Maharashtra",
+      "email": "tusharsingla22222@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 88,
+      "public_gists": 0,
+      "followers": 14,
+      "following": 26,
+      "created_at": "2025-09-03T08:07:13Z",
+      "updated_at": "2026-06-22T05:52:49Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784973575495
+}

@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.706Z",
+    "profile": {
+      "login": "divyansha12",
+      "id": 227677748,
+      "node_id": "U_kgDODZIWNA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227677748?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/divyansha12",
+      "html_url": "https://github.com/divyansha12",
+      "followers_url": "https://api.github.com/users/divyansha12/followers",
+      "following_url": "https://api.github.com/users/divyansha12/following{/other_user}",
+      "gists_url": "https://api.github.com/users/divyansha12/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/divyansha12/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/divyansha12/subscriptions",
+      "organizations_url": "https://api.github.com/users/divyansha12/orgs",
+      "repos_url": "https://api.github.com/users/divyansha12/repos",
+      "events_url": "https://api.github.com/users/divyansha12/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/divyansha12/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Divyansha singh",
+      "company": null,
+      "blog": "",
+      "location": "Pune,Maharastra",
+      "email": "singhdivyansha243@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 31,
+      "public_gists": 0,
+      "followers": 3,
+      "following": 5,
+      "created_at": "2025-08-20T20:29:22Z",
+      "updated_at": "2026-05-28T20:54:39Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030706
+}

@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-18T12:17:27.573Z",
+    "cachedAt": "2026-06-25T09:47:44.649Z",
     "profile": {
       "login": "singlakinjal",
       "id": 230706361,
@@ -25,7 +25,7 @@
       "company": null,
       "blog": "",
       "location": null,
-      "email": null,
+      "email": "thekinjalsingla@gmail.com",
       "hireable": null,
       "bio": null,
       "twitter_username": null,
@@ -952,5 +952,5 @@
     ],
     "issues": []
   },
-  "expiresAt": 1784377047573
+  "expiresAt": 1784972864650
 }

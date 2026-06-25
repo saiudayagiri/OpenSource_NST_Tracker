@@ -133,7 +133,7 @@ export function RefreshButton({ cachedAt: initialCachedAt, username, period }: P
 
       {/* Custom Premium Toast Alert */}
       {toast && (
-        <div className="fixed bottom-5 right-5 z-50 flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/10 bg-[#0d0d14]/90 backdrop-blur-md shadow-2xl text-xs max-w-xs transition-all duration-300">
+        <div className="fixed bottom-5 right-5 z-50 flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/10 bg-[#030712]/90 backdrop-blur-md shadow-2xl text-xs max-w-xs transition-all duration-300">
           {toast.type === 'success' && (
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>

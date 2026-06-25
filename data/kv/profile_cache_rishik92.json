@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.679Z",
+    "profile": {
+      "login": "RISHIK92",
+      "id": 86944435,
+      "node_id": "MDQ6VXNlcjg2OTQ0NDM1",
+      "avatar_url": "https://avatars.githubusercontent.com/u/86944435?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/RISHIK92",
+      "html_url": "https://github.com/RISHIK92",
+      "followers_url": "https://api.github.com/users/RISHIK92/followers",
+      "following_url": "https://api.github.com/users/RISHIK92/following{/other_user}",
+      "gists_url": "https://api.github.com/users/RISHIK92/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/RISHIK92/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/RISHIK92/subscriptions",
+      "organizations_url": "https://api.github.com/users/RISHIK92/orgs",
+      "repos_url": "https://api.github.com/users/RISHIK92/repos",
+      "events_url": "https://api.github.com/users/RISHIK92/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/RISHIK92/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Rishik",
+      "company": null,
+      "blog": "www.rishik.codes",
+      "location": "India",
+      "email": null,
+      "hireable": null,
+      "bio": "co-creator of rippleX",
+      "twitter_username": null,
+      "public_repos": 69,
+      "public_gists": 0,
+      "followers": 7,
+      "following": 4,
+      "created_at": "2021-07-05T05:22:07Z",
+      "updated_at": "2026-06-19T04:21:28Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030679
+}

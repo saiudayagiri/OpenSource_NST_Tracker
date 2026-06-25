@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.683Z",
+    "profile": {
+      "login": "SatyamKumarCS",
+      "id": 184734939,
+      "node_id": "U_kgDOCwLU2w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184734939?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/SatyamKumarCS",
+      "html_url": "https://github.com/SatyamKumarCS",
+      "followers_url": "https://api.github.com/users/SatyamKumarCS/followers",
+      "following_url": "https://api.github.com/users/SatyamKumarCS/following{/other_user}",
+      "gists_url": "https://api.github.com/users/SatyamKumarCS/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/SatyamKumarCS/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/SatyamKumarCS/subscriptions",
+      "organizations_url": "https://api.github.com/users/SatyamKumarCS/orgs",
+      "repos_url": "https://api.github.com/users/SatyamKumarCS/repos",
+      "events_url": "https://api.github.com/users/SatyamKumarCS/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/SatyamKumarCS/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Satyam Kumar",
+      "company": "@GoForGold-NST ",
+      "blog": "",
+      "location": null,
+      "email": "satyamkumarch15@gmail.com",
+      "hireable": true,
+      "bio": "💻 CSE (AI) student | Building AI & Full-Stack projects | Future SDE @ MAANG 🚀",
+      "twitter_username": null,
+      "public_repos": 77,
+      "public_gists": 0,
+      "followers": 3,
+      "following": 2,
+      "created_at": "2024-10-12T09:15:16Z",
+      "updated_at": "2026-06-22T19:36:23Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030683
+}

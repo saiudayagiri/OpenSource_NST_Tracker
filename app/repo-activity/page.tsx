@@ -6,8 +6,12 @@ interface Contributor {
   username: string;
   avatarUrl: string;
   prsCount: number;
+  mergedPRs: number;
+  openPRs: number;
+  closedPRs: number;
   issuesCount: number;
-  prs: Array<{ number: number; title: string; url: string; state: string; createdAt: string }>;
+  isMaintainer: boolean;
+  prs: Array<{ number: number; title: string; url: string; state: string; createdAt: string; mergedAt: string | null }>;
   issues: Array<{ number: number; title: string; url: string; state: string; createdAt: string }>;
 }
 
@@ -26,9 +30,12 @@ export default function RepoActivityPage() {
   const [error, setError] = useState('');
   const [repoInfo, setRepoInfo] = useState<RepoInfo | null>(null);
   const [contributors, setContributors] = useState<Contributor[]>([]);
-  const [expandedUser, setExpandedUser] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<string | null>(null);
+  const [userActivity, setUserActivity] = useState<any | null>(null);
+  const [loadingUser, setLoadingUser] = useState(false);
+  const [userError, setUserError] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'prs' | 'issues'>('all');
-  const [period, setPeriod] = useState<'all' | '1day' | 'week' | 'month' | '2months' | '3months'>('all');
+  const [period, setPeriod] = useState<'all' | '1day' | 'week' | 'month' | '2months' | '3months'>('1day');
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
 
   // Fetch session on mount to check authentication state
@@ -39,28 +46,20 @@ export default function RepoActivityPage() {
       .catch(() => setAuthenticated(false));
   }, []);
 
-  // Trigger search on period change if a repository has already been searched
+  // Lock background body scroll when contributor details modal is open
   useEffect(() => {
-    if (repoInfo) {
-      const parsed = parseRepoInput(repoInput);
-      if (parsed) {
-        setLoading(true);
-        setError('');
-        setExpandedUser(null);
-        fetch(`/api/repo-activity?repo=${encodeURIComponent(parsed)}&period=${period}`)
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.error) setError(data.error);
-            else {
-              setRepoInfo(data.repoInfo);
-              setContributors(data.contributors);
-            }
-          })
-          .catch(() => setError('A network error occurred.'))
-          .finally(() => setLoading(false));
-      }
+    if (selectedUser) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
-  }, [period]);
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+    };
+  }, [selectedUser]);
 
   function parseRepoInput(input: string): string | null {
     const clean = input.trim().replace(/\/$/, '');
@@ -76,22 +75,14 @@ export default function RepoActivityPage() {
     return null;
   }
 
-  async function handleSearch(e: React.FormEvent) {
-    e.preventDefault();
-    const parsed = parseRepoInput(repoInput);
-    if (!parsed) {
-      setError('Invalid format. Please enter a repository path (owner/repo) or full GitHub URL.');
-      return;
-    }
-
+  async function performSearch(repoPath: string, targetPeriod: typeof period) {
     setLoading(true);
     setError('');
-    setRepoInfo(null);
-    setContributors([]);
-    setExpandedUser(null);
+    setSelectedUser(null);
+    setUserActivity(null);
 
     try {
-      const res = await fetch(`/api/repo-activity?repo=${encodeURIComponent(parsed)}&period=${period}`);
+      const res = await fetch(`/api/repo-activity?repo=${encodeURIComponent(repoPath)}&period=${targetPeriod}`);
       const data = await res.json();
 
       if (res.ok) {
@@ -104,6 +95,45 @@ export default function RepoActivityPage() {
       setError('A network error occurred. Please try again.');
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const parsed = parseRepoInput(repoInput);
+    if (!parsed) {
+      setError('Invalid format. Please enter a repository path (owner/repo) or full GitHub URL.');
+      return;
+    }
+    setRepoInfo(null);
+    setContributors([]);
+    await performSearch(parsed, period);
+  }
+
+  async function handlePeriodChange(newPeriod: typeof period) {
+    setPeriod(newPeriod);
+    if (repoInfo) {
+      await performSearch(repoInfo.fullName, newPeriod);
+    }
+  }
+
+  async function handleContributorClick(username: string) {
+    setSelectedUser(username);
+    setLoadingUser(true);
+    setUserError('');
+    setUserActivity(null);
+    try {
+      const res = await fetch(`/api/user-activity?username=${encodeURIComponent(username)}&period=all`);
+      const data = await res.json();
+      if (res.ok) {
+        setUserActivity(data);
+      } else {
+        setUserError(data.error || 'Failed to fetch user activity.');
+      }
+    } catch {
+      setUserError('A network error occurred. Please try again.');
+    } finally {
+      setLoadingUser(false);
     }
   }
 
@@ -138,7 +168,7 @@ export default function RepoActivityPage() {
   );
 
   return (
-    <main className="min-h-screen bg-[#0d0d14] text-white py-12 px-4 relative overflow-hidden">
+    <main className="min-h-screen bg-[#030712] text-white py-12 px-4 relative overflow-hidden">
       {/* Background glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/5 blur-[120px] rounded-full" />
@@ -198,17 +228,17 @@ export default function RepoActivityPage() {
           </span>
           <div className="flex bg-white/[0.03] border border-white/[0.07] rounded-xl p-1 shrink-0">
             {([
-              { id: 'all',     label: 'All Time' },
               { id: '1day',    label: '24h' },
               { id: 'week',    label: 'Week' },
               { id: 'month',   label: 'Month' },
               { id: '2months', label: '2 Months' },
               { id: '3months', label: '3 Months' },
+              { id: 'all',     label: 'All Time' },
             ] as const).map((p) => (
               <button
                 key={p.id}
                 type="button"
-                onClick={() => setPeriod(p.id)}
+                onClick={() => handlePeriodChange(p.id)}
                 className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   period === p.id
                     ? 'bg-purple-600/20 text-purple-300 border border-purple-500/30'
@@ -232,7 +262,7 @@ export default function RepoActivityPage() {
             </div>
             <a
               href="/api/auth/github"
-              className="bg-[#24292e] border border-white/[0.08] hover:bg-[#2f363d] hover:border-white/[0.15] text-white px-3.5 py-1.5 rounded-xl transition-all text-xs font-semibold shadow-md active:scale-95 shrink-0"
+              className="bg-[#161b22] border border-white/[0.08] hover:bg-[#21262d] hover:border-white/[0.15] text-white px-3.5 py-1.5 rounded-xl transition-all text-xs font-semibold shadow-md active:scale-95 shrink-0"
             >
               Sign In with GitHub
             </a>
@@ -309,7 +339,6 @@ export default function RepoActivityPage() {
                         type="button"
                         onClick={() => {
                           setFilterType(t.id);
-                          setExpandedUser(null);
                         }}
                         className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                           filterType === t.id
@@ -327,7 +356,6 @@ export default function RepoActivityPage() {
               {/* Leaderboard Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {sortedContributors.map((c, index) => {
-                  const isExpanded = expandedUser === c.username;
                   const score =
                     filterType === 'prs'
                       ? c.prsCount
@@ -351,11 +379,8 @@ export default function RepoActivityPage() {
                   return (
                     <div
                       key={c.username}
-                      className={`group border rounded-2xl transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
-                        isExpanded
-                          ? 'bg-white/[0.05] border-purple-500/40 shadow-xl shadow-purple-900/15'
-                          : 'bg-white/[0.02] border-white/[0.06] hover:bg-white/[0.035] hover:border-white/[0.12] hover:shadow-lg hover:shadow-black/25'
-                      }`}
+                      onClick={() => handleContributorClick(c.username)}
+                      className="group border rounded-2xl bg-white/[0.02] border-white/[0.06] sys-card-hover flex flex-col justify-between relative overflow-hidden cursor-pointer active:scale-[0.98]"
                     >
                       {/* Top Rank Badge & Avatar Info */}
                       <div className="p-5 flex-1 flex flex-col justify-between gap-4">
@@ -367,12 +392,16 @@ export default function RepoActivityPage() {
                               className="w-12 h-12 rounded-full ring-2 ring-white/10 group-hover:ring-purple-500/30 transition-all object-cover shrink-0"
                             />
                             <div className="min-w-0">
-                              <span className="text-white/90 font-bold block truncate text-base">
+                              <span className="text-white/90 font-bold block truncate text-base group-hover:text-purple-400 transition-colors">
                                 @{c.username}
                               </span>
-                              <span className="text-[10px] text-white/30 font-mono uppercase tracking-wider">
-                                Rank #{index + 1}
-                              </span>
+                              {c.isMaintainer && (
+                                <div className="flex items-center gap-1.5 mt-0.5">
+                                  <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[8px] font-medium bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                                    🛡️ Maintainer
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           </div>
 
@@ -382,14 +411,22 @@ export default function RepoActivityPage() {
                         </div>
 
                         {/* Activity stats strip */}
-                        <div className="grid grid-cols-2 gap-2 mt-2">
-                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-2.5 text-center">
-                            <div className="text-[10px] text-white/30 font-mono uppercase tracking-wider mb-0.5">PRs</div>
-                            <div className="text-base font-bold text-emerald-400 font-mono">{c.prsCount}</div>
+                        <div className="grid grid-cols-4 gap-1.5 mt-2">
+                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-1.5 text-center">
+                            <div className="text-[9px] text-white/35 font-mono uppercase tracking-wider">PRs</div>
+                            <div className="text-sm font-bold text-white font-mono">{c.prsCount}</div>
                           </div>
-                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-2.5 text-center">
-                            <div className="text-[10px] text-white/30 font-mono uppercase tracking-wider mb-0.5">Issues</div>
-                            <div className="text-base font-bold text-purple-400 font-mono">{c.issuesCount}</div>
+                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-1.5 text-center">
+                            <div className="text-[9px] text-white/35 font-mono uppercase tracking-wider">Merged</div>
+                            <div className="text-sm font-bold text-emerald-400 font-mono">{c.mergedPRs}</div>
+                          </div>
+                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-1.5 text-center">
+                            <div className="text-[9px] text-white/35 font-mono uppercase tracking-wider">Open</div>
+                            <div className="text-sm font-bold text-teal-400 font-mono">{c.openPRs}</div>
+                          </div>
+                          <div className="bg-white/[0.015] border border-white/[0.04] rounded-xl p-1.5 text-center">
+                            <div className="text-[9px] text-white/35 font-mono uppercase tracking-wider">Issues</div>
+                            <div className="text-sm font-bold text-purple-400 font-mono">{c.issuesCount}</div>
                           </div>
                         </div>
 
@@ -407,92 +444,6 @@ export default function RepoActivityPage() {
                           </div>
                         </div>
                       </div>
-
-                      {/* Expand Action Button */}
-                      <button
-                        type="button"
-                        onClick={() => setExpandedUser(isExpanded ? null : c.username)}
-                        className={`w-full py-2.5 border-t text-xs font-semibold flex items-center justify-center gap-1.5 transition-all select-none cursor-pointer ${
-                          isExpanded
-                            ? 'bg-purple-600/10 border-purple-500/30 text-purple-400 hover:bg-purple-600/15'
-                            : 'bg-white/[0.01] border-white/[0.06] text-white/45 hover:text-white/75 hover:bg-white/[0.03]'
-                        }`}
-                      >
-                        <span>{isExpanded ? 'Hide Recent Work' : 'Show Recent Work'}</span>
-                        <svg
-                          className={`w-3.5 h-3.5 transition-all ${isExpanded ? 'rotate-180' : ''}`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-
-                      {/* Expanded Details inside Card */}
-                      {isExpanded && (
-                        <div className="border-t border-white/[0.05] bg-black/30 p-4 space-y-4 max-h-64 overflow-y-auto scrollbar-thin animate-in fade-in duration-200">
-                          {/* Pull Requests list */}
-                          {c.prs.length > 0 && (
-                            <div>
-                              <h4 className="text-[9px] text-emerald-400 font-bold uppercase tracking-wider mb-2 font-mono">Pull Requests</h4>
-                              <div className="space-y-1.5">
-                                {c.prs.map((pr) => (
-                                  <a
-                                    key={pr.number}
-                                    href={pr.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-between gap-3 p-2 rounded-xl bg-white/[0.01] border border-white/[0.04] hover:bg-white/[0.03] hover:border-white/[0.08] transition-all text-[11px] text-white/70 hover:text-white font-sans"
-                                  >
-                                    <span className="font-medium truncate">
-                                      <span className="text-white/20 mr-1">#{pr.number}</span>
-                                      {pr.title}
-                                    </span>
-                                    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase border shrink-0 ${
-                                      pr.state === 'open'
-                                        ? 'bg-teal-500/10 border-teal-500/20 text-teal-400'
-                                        : 'bg-purple-500/10 border-purple-500/20 text-purple-400'
-                                    }`}>
-                                      {pr.state}
-                                    </span>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-
-                          {/* Issues list */}
-                          {c.issues.length > 0 && (
-                            <div>
-                              <h4 className="text-[9px] text-purple-400 font-bold uppercase tracking-wider mb-2 font-mono">Issues</h4>
-                              <div className="space-y-1.5">
-                                {c.issues.map((issue) => (
-                                  <a
-                                    key={issue.number}
-                                    href={issue.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-between gap-3 p-2 rounded-xl bg-white/[0.01] border border-white/[0.04] hover:bg-white/[0.03] hover:border-white/[0.08] transition-all text-[11px] text-white/70 hover:text-white font-sans"
-                                  >
-                                    <span className="font-medium truncate">
-                                      <span className="text-white/20 mr-1">#{issue.number}</span>
-                                      {issue.title}
-                                    </span>
-                                    <span className={`px-1.5 py-0.5 rounded text-[8px] font-bold uppercase border shrink-0 ${
-                                      issue.state === 'open'
-                                        ? 'bg-teal-500/10 border-teal-500/20 text-teal-400'
-                                        : 'bg-purple-500/10 border-purple-500/20 text-purple-400'
-                                    }`}>
-                                      {issue.state}
-                                    </span>
-                                  </a>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
                   );
                 })}
@@ -523,6 +474,140 @@ export default function RepoActivityPage() {
           </div>
         )}
       </div>
+
+      {/* User Activity Modal */}
+      {selectedUser && (
+        <div data-lenis-prevent className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="bg-[#0a0f1d] border border-white/[0.08] rounded-3xl w-full max-w-2xl max-h-[85vh] overflow-hidden flex flex-col shadow-2xl shadow-purple-900/30 animate-in zoom-in-95 duration-200">
+            
+            {/* Modal Header */}
+            <div className="p-6 border-b border-white/[0.06] flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">👤</span>
+                <div>
+                  <h3 className="text-lg font-bold text-white">Contributor Details</h3>
+                  <p className="text-xs text-white/40">@{selectedUser}&apos;s pull request history across GitHub</p>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  setSelectedUser(null);
+                  setUserActivity(null);
+                }}
+                className="text-white/40 hover:text-white/80 transition-colors p-1.5 rounded-lg bg-white/[0.03] border border-white/[0.05] cursor-pointer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-thin overscroll-contain">
+              {loadingUser && (
+                <div className="flex flex-col items-center justify-center py-20 gap-3">
+                  <svg className="w-8 h-8 text-purple-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  <p className="text-sm text-white/40 font-medium">Fetching contributor statistics...</p>
+                </div>
+              )}
+
+              {userError && (
+                <div className="bg-red-500/10 border border-red-500/25 rounded-2xl p-4 text-red-400 text-sm flex items-start gap-3">
+                  <svg className="w-5 h-5 flex-shrink-0 text-red-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                  </svg>
+                  <p className="leading-snug">{userError}</p>
+                </div>
+              )}
+
+              {userActivity && (
+                <>
+                  {/* Repositories breakdown */}
+                  <div>
+                    <h4 className="text-xs font-bold text-white/60 uppercase tracking-wider mb-3">Repositories Contributed To</h4>
+                    {userActivity.repositories.length === 0 ? (
+                      <p className="text-sm text-white/30 italic">No pull requests found in this period.</p>
+                    ) : (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {userActivity.repositories.map((repo: any) => (
+                          <div key={repo.repoName} className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 space-y-3">
+                            <div className="font-bold text-sm text-white truncate" title={repo.repoName}>
+                              {repo.repoName}
+                            </div>
+                            <div className="grid grid-cols-4 gap-2 text-center text-xs">
+                              <div className="bg-white/[0.015] border border-white/[0.04] rounded-lg p-1">
+                                <div className="text-[9px] text-white/30">Total</div>
+                                <div className="font-mono font-bold text-white">{repo.totalPRs}</div>
+                              </div>
+                              <div className="bg-white/[0.015] border border-white/[0.04] rounded-lg p-1">
+                                <div className="text-[9px] text-emerald-400">Merged</div>
+                                <div className="font-mono font-bold text-emerald-400">{repo.mergedPRs}</div>
+                              </div>
+                              <div className="bg-white/[0.015] border border-white/[0.04] rounded-lg p-1">
+                                <div className="text-[9px] text-teal-400">Open</div>
+                                <div className="font-mono font-bold text-teal-400">{repo.openPRs}</div>
+                              </div>
+                              <div className="bg-white/[0.015] border border-white/[0.04] rounded-lg p-1">
+                                <div className="text-[9px] text-purple-400">Closed</div>
+                                <div className="font-mono font-bold text-purple-400">{repo.closedPRs}</div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Recent PRs Timeline */}
+                  <div>
+                    <h4 className="text-xs font-bold text-white/60 uppercase tracking-wider mb-3">Pull Request History</h4>
+                    {userActivity.pullRequests.length === 0 ? (
+                      <p className="text-sm text-white/30 italic">No recent work to display.</p>
+                    ) : (
+                      <div className="space-y-2">
+                        {userActivity.pullRequests.map((pr: any) => (
+                          <a
+                            key={pr.url}
+                            href={pr.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-start justify-between gap-4 p-3.5 rounded-2xl bg-white/[0.01] border border-white/[0.04] hover:bg-white/[0.03] hover:border-white/[0.08] transition-all text-xs text-white/80 hover:text-white"
+                          >
+                            <div className="space-y-1.5 min-w-0">
+                              <div className="font-medium line-clamp-2">
+                                <span className="text-white/20 mr-1.5 font-mono">#{pr.number}</span>
+                                {pr.title}
+                              </div>
+                              <div className="text-[10px] text-white/30 flex items-center gap-2">
+                                <span className="font-semibold text-purple-400/80">{pr.repoName}</span>
+                                <span>•</span>
+                                <span>{new Date(pr.createdAt).toLocaleDateString()}</span>
+                              </div>
+                            </div>
+                            <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase border shrink-0 ${
+                              pr.state === 'open'
+                                ? 'bg-teal-500/10 border-teal-500/20 text-teal-400'
+                                : pr.mergedAt
+                                ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+                                : 'bg-purple-500/10 border-purple-500/20 text-purple-400'
+                            }`}>
+                              {pr.mergedAt ? 'merged' : pr.state}
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
     </main>
   );
 }

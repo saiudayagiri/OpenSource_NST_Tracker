@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.694Z",
+    "profile": {
+      "login": "UserAkku",
+      "id": 186388947,
+      "node_id": "U_kgDOCxwR0w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/186388947?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/UserAkku",
+      "html_url": "https://github.com/UserAkku",
+      "followers_url": "https://api.github.com/users/UserAkku/followers",
+      "following_url": "https://api.github.com/users/UserAkku/following{/other_user}",
+      "gists_url": "https://api.github.com/users/UserAkku/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/UserAkku/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/UserAkku/subscriptions",
+      "organizations_url": "https://api.github.com/users/UserAkku/orgs",
+      "repos_url": "https://api.github.com/users/UserAkku/repos",
+      "events_url": "https://api.github.com/users/UserAkku/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/UserAkku/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Akhilesh kumar",
+      "company": null,
+      "blog": "",
+      "location": "jaipur",
+      "email": "akhileshkumaroffical@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 34,
+      "public_gists": 0,
+      "followers": 5,
+      "following": 5,
+      "created_at": "2024-10-26T11:30:34Z",
+      "updated_at": "2026-06-08T23:56:26Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030694
+}

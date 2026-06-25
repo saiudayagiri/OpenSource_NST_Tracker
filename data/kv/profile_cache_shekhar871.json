@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.684Z",
+    "profile": {
+      "login": "shekhar871",
+      "id": 228505393,
+      "node_id": "U_kgDODZ63MQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/228505393?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/shekhar871",
+      "html_url": "https://github.com/shekhar871",
+      "followers_url": "https://api.github.com/users/shekhar871/followers",
+      "following_url": "https://api.github.com/users/shekhar871/following{/other_user}",
+      "gists_url": "https://api.github.com/users/shekhar871/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/shekhar871/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/shekhar871/subscriptions",
+      "organizations_url": "https://api.github.com/users/shekhar871/orgs",
+      "repos_url": "https://api.github.com/users/shekhar871/repos",
+      "events_url": "https://api.github.com/users/shekhar871/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/shekhar871/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Shekhar Shridhar Jadhav",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": "shekharjadhav9766@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 42,
+      "public_gists": 0,
+      "followers": 5,
+      "following": 7,
+      "created_at": "2025-08-25T12:06:25Z",
+      "updated_at": "2026-06-10T02:25:13Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030684
+}

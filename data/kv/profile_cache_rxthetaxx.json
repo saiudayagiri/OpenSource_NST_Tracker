@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.682Z",
+    "profile": {
+      "login": "RxThetaxx",
+      "id": 74127923,
+      "node_id": "MDQ6VXNlcjc0MTI3OTIz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74127923?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/RxThetaxx",
+      "html_url": "https://github.com/RxThetaxx",
+      "followers_url": "https://api.github.com/users/RxThetaxx/followers",
+      "following_url": "https://api.github.com/users/RxThetaxx/following{/other_user}",
+      "gists_url": "https://api.github.com/users/RxThetaxx/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/RxThetaxx/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/RxThetaxx/subscriptions",
+      "organizations_url": "https://api.github.com/users/RxThetaxx/orgs",
+      "repos_url": "https://api.github.com/users/RxThetaxx/repos",
+      "events_url": "https://api.github.com/users/RxThetaxx/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/RxThetaxx/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Rishi Agarwal",
+      "company": null,
+      "blog": "",
+      "location": "India",
+      "email": "rishiagarwal.personal@gmail.com",
+      "hireable": true,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 54,
+      "public_gists": 0,
+      "followers": 4,
+      "following": 10,
+      "created_at": "2020-11-08T05:47:20Z",
+      "updated_at": "2026-06-12T17:27:22Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030682
+}

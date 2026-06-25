@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:59:32.355Z",
+    "profile": {
+      "login": "Shristibot",
+      "id": 235037217,
+      "node_id": "U_kgDODgJiIQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/235037217?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Shristibot",
+      "html_url": "https://github.com/Shristibot",
+      "followers_url": "https://api.github.com/users/Shristibot/followers",
+      "following_url": "https://api.github.com/users/Shristibot/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Shristibot/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Shristibot/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Shristibot/subscriptions",
+      "organizations_url": "https://api.github.com/users/Shristibot/orgs",
+      "repos_url": "https://api.github.com/users/Shristibot/repos",
+      "events_url": "https://api.github.com/users/Shristibot/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Shristibot/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Shristi",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": "Building. Learning. Iterating.",
+      "twitter_username": null,
+      "public_repos": 28,
+      "public_gists": 0,
+      "followers": 4,
+      "following": 0,
+      "created_at": "2025-09-29T06:20:34Z",
+      "updated_at": "2026-01-17T20:04:56Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784973572355
+}

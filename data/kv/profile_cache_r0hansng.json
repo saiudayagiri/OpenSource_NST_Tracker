@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.680Z",
+    "profile": {
+      "login": "r0hansng",
+      "id": 170820512,
+      "node_id": "U_kgDOCi6DoA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/170820512?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/r0hansng",
+      "html_url": "https://github.com/r0hansng",
+      "followers_url": "https://api.github.com/users/r0hansng/followers",
+      "following_url": "https://api.github.com/users/r0hansng/following{/other_user}",
+      "gists_url": "https://api.github.com/users/r0hansng/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/r0hansng/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/r0hansng/subscriptions",
+      "organizations_url": "https://api.github.com/users/r0hansng/orgs",
+      "repos_url": "https://api.github.com/users/r0hansng/repos",
+      "events_url": "https://api.github.com/users/r0hansng/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/r0hansng/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Rohan Singh ",
+      "company": null,
+      "blog": "rohan-singh.vercel.app",
+      "location": "Delhi NCR, India",
+      "email": "contact.me.rohansingh@gmail.com",
+      "hireable": null,
+      "bio": "Building with Code",
+      "twitter_username": "r0hansng",
+      "public_repos": 19,
+      "public_gists": 0,
+      "followers": 7,
+      "following": 2,
+      "created_at": "2024-05-25T16:38:03Z",
+      "updated_at": "2026-06-07T06:22:49Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030680
+}

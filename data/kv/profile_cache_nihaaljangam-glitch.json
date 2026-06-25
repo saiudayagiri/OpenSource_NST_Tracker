@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.708Z",
+    "profile": {
+      "login": "nihaaljangam-glitch",
+      "id": 228056423,
+      "node_id": "U_kgDODZfdZw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/228056423?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nihaaljangam-glitch",
+      "html_url": "https://github.com/nihaaljangam-glitch",
+      "followers_url": "https://api.github.com/users/nihaaljangam-glitch/followers",
+      "following_url": "https://api.github.com/users/nihaaljangam-glitch/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nihaaljangam-glitch/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nihaaljangam-glitch/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nihaaljangam-glitch/subscriptions",
+      "organizations_url": "https://api.github.com/users/nihaaljangam-glitch/orgs",
+      "repos_url": "https://api.github.com/users/nihaaljangam-glitch/repos",
+      "events_url": "https://api.github.com/users/nihaaljangam-glitch/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nihaaljangam-glitch/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "nihaaljangam-glitch",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 22,
+      "public_gists": 0,
+      "followers": 0,
+      "following": 0,
+      "created_at": "2025-08-22T16:51:23Z",
+      "updated_at": "2025-11-19T07:06:22Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030708
+}

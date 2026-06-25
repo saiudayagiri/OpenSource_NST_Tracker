@@ -49,7 +49,7 @@ function AchieverCard({
   const bio = entry.headline ?? profile?.bio;
 
   const inner = (
-    <div className="group relative bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 hover:bg-white/[0.05] hover:border-yellow-500/20 transition-all duration-200 hover:shadow-xl hover:shadow-yellow-900/10 hover:-translate-y-0.5 h-full">
+    <div className="group relative bg-white/[0.025] border border-white/[0.07] rounded-2xl p-6 hover:bg-white/[0.055] hover:border-yellow-500/35 transition-all duration-300 hover:shadow-xl hover:shadow-yellow-500/10 hover:-translate-y-1 h-full">
       {index < 3 && (
         <div className="absolute top-4 right-4 text-lg">
           {index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉'}
@@ -152,7 +152,7 @@ export default async function AchieversPage() {
   const programSet = new Set(achievers.flatMap((a) => a.entry.programs.map((p) => p.name)));
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       <div className="relative overflow-hidden pt-14 pb-10 px-4">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute top-0 left-1/3 w-[500px] h-[350px] rounded-full bg-yellow-600/6 blur-[100px]" />

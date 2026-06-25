@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.697Z",
+    "profile": {
+      "login": "abhinavsingh-hub",
+      "id": 225646787,
+      "node_id": "U_kgDODXMYww",
+      "avatar_url": "https://avatars.githubusercontent.com/u/225646787?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/abhinavsingh-hub",
+      "html_url": "https://github.com/abhinavsingh-hub",
+      "followers_url": "https://api.github.com/users/abhinavsingh-hub/followers",
+      "following_url": "https://api.github.com/users/abhinavsingh-hub/following{/other_user}",
+      "gists_url": "https://api.github.com/users/abhinavsingh-hub/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/abhinavsingh-hub/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/abhinavsingh-hub/subscriptions",
+      "organizations_url": "https://api.github.com/users/abhinavsingh-hub/orgs",
+      "repos_url": "https://api.github.com/users/abhinavsingh-hub/repos",
+      "events_url": "https://api.github.com/users/abhinavsingh-hub/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/abhinavsingh-hub/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Abhinav Singh",
+      "company": null,
+      "blog": "",
+      "location": "Lucknow",
+      "email": "abhinavsinghdhakrekm@gmail.com",
+      "hireable": null,
+      "bio": "(: \r\nSomeone working towards being THE ONE",
+      "twitter_username": null,
+      "public_repos": 35,
+      "public_gists": 0,
+      "followers": 6,
+      "following": 4,
+      "created_at": "2025-08-10T04:49:48Z",
+      "updated_at": "2026-06-03T14:42:51Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030697
+}

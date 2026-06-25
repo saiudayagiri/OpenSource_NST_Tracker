@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.708Z",
+    "profile": {
+      "login": "nishtha-09-gupta",
+      "id": 184469231,
+      "node_id": "U_kgDOCv7G7w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184469231?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/nishtha-09-gupta",
+      "html_url": "https://github.com/nishtha-09-gupta",
+      "followers_url": "https://api.github.com/users/nishtha-09-gupta/followers",
+      "following_url": "https://api.github.com/users/nishtha-09-gupta/following{/other_user}",
+      "gists_url": "https://api.github.com/users/nishtha-09-gupta/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/nishtha-09-gupta/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/nishtha-09-gupta/subscriptions",
+      "organizations_url": "https://api.github.com/users/nishtha-09-gupta/orgs",
+      "repos_url": "https://api.github.com/users/nishtha-09-gupta/repos",
+      "events_url": "https://api.github.com/users/nishtha-09-gupta/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/nishtha-09-gupta/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Nishtha",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 31,
+      "public_gists": 0,
+      "followers": 1,
+      "following": 6,
+      "created_at": "2024-10-10T04:21:29Z",
+      "updated_at": "2026-04-13T05:38:55Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030708
+}

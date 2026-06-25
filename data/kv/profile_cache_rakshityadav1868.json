@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.678Z",
+    "profile": {
+      "login": "rakshityadav1868",
+      "id": 227184454,
+      "node_id": "U_kgDODYqPRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227184454?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/rakshityadav1868",
+      "html_url": "https://github.com/rakshityadav1868",
+      "followers_url": "https://api.github.com/users/rakshityadav1868/followers",
+      "following_url": "https://api.github.com/users/rakshityadav1868/following{/other_user}",
+      "gists_url": "https://api.github.com/users/rakshityadav1868/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/rakshityadav1868/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/rakshityadav1868/subscriptions",
+      "organizations_url": "https://api.github.com/users/rakshityadav1868/orgs",
+      "repos_url": "https://api.github.com/users/rakshityadav1868/repos",
+      "events_url": "https://api.github.com/users/rakshityadav1868/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/rakshityadav1868/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Rakshit ",
+      "company": null,
+      "blog": "rakshity.me",
+      "location": "Delhi",
+      "email": "yadavrakshit60@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": "rakshit_yadav19",
+      "public_repos": 91,
+      "public_gists": 0,
+      "followers": 17,
+      "following": 36,
+      "created_at": "2025-08-18T13:16:29Z",
+      "updated_at": "2026-06-01T12:04:14Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030678
+}

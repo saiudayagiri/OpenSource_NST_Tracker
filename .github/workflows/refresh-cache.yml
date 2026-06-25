@@ -1,0 +1,29 @@
+name: Incremental Cache Refresh
+
+on:
+  schedule:
+    # Run every 15 minutes
+    - cron: '*/15 * * * *'
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Incremental Cache Refresh
+        run: |
+          if [ -z "${{ secrets.APP_URL }}" ]; then
+            echo "Error: APP_URL secret is not configured in GitHub repository secrets."
+            exit 1
+          fi
+          if [ -z "${{ secrets.CRON_SECRET }}" ]; then
+            echo "Error: CRON_SECRET secret is not configured in GitHub repository secrets."
+            exit 1
+          fi
+          
+          echo "Triggering incremental cache refresh for ${{ secrets.APP_URL }}..."
+          curl -X POST "${{ secrets.APP_URL }}/api/refresh/incremental" \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            -f || exit 1
+          echo "Successfully triggered refresh!"

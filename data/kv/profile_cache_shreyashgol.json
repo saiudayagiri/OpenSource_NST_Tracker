@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.710Z",
+    "profile": {
+      "login": "Shreyashgol",
+      "id": 194799338,
+      "node_id": "U_kgDOC5xm6g",
+      "avatar_url": "https://avatars.githubusercontent.com/u/194799338?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Shreyashgol",
+      "html_url": "https://github.com/Shreyashgol",
+      "followers_url": "https://api.github.com/users/Shreyashgol/followers",
+      "following_url": "https://api.github.com/users/Shreyashgol/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Shreyashgol/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Shreyashgol/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Shreyashgol/subscriptions",
+      "organizations_url": "https://api.github.com/users/Shreyashgol/orgs",
+      "repos_url": "https://api.github.com/users/Shreyashgol/repos",
+      "events_url": "https://api.github.com/users/Shreyashgol/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Shreyashgol/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Shreyash Golhani",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": "Passionate to solve real time problems through ideation and programming",
+      "twitter_username": null,
+      "public_repos": 102,
+      "public_gists": 0,
+      "followers": 5,
+      "following": 14,
+      "created_at": "2025-01-13T13:17:57Z",
+      "updated_at": "2026-06-13T04:29:35Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030710
+}

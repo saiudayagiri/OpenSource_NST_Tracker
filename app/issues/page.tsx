@@ -345,7 +345,7 @@ Fixes #234`,
 
 export default function IssuesPage() {
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       {/* Hero */}
       <div className="relative overflow-hidden pt-14 pb-10 px-4">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">

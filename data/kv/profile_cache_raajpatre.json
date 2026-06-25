@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.709Z",
+    "profile": {
+      "login": "raajpatre",
+      "id": 216502188,
+      "node_id": "U_kgDODOePrA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/216502188?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/raajpatre",
+      "html_url": "https://github.com/raajpatre",
+      "followers_url": "https://api.github.com/users/raajpatre/followers",
+      "following_url": "https://api.github.com/users/raajpatre/following{/other_user}",
+      "gists_url": "https://api.github.com/users/raajpatre/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/raajpatre/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/raajpatre/subscriptions",
+      "organizations_url": "https://api.github.com/users/raajpatre/orgs",
+      "repos_url": "https://api.github.com/users/raajpatre/repos",
+      "events_url": "https://api.github.com/users/raajpatre/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/raajpatre/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Raaj Patre",
+      "company": "Newton School of Technology",
+      "blog": "",
+      "location": "Bangaluru, India",
+      "email": null,
+      "hireable": null,
+      "bio": "CSE @ Newton School of Technology, Bengaluru. I build and ship — Currently leading tech + marketing for Aayam 2026 (National Tech Fest). GSSoC '26 Contributor. ",
+      "twitter_username": null,
+      "public_repos": 34,
+      "public_gists": 0,
+      "followers": 5,
+      "following": 6,
+      "created_at": "2025-06-16T08:09:31Z",
+      "updated_at": "2026-05-26T18:34:44Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030709
+}

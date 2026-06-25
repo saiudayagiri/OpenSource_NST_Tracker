@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.706Z",
+    "profile": {
+      "login": "bitflicker64",
+      "id": 211528427,
+      "node_id": "U_kgDODJuq6w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/211528427?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/bitflicker64",
+      "html_url": "https://github.com/bitflicker64",
+      "followers_url": "https://api.github.com/users/bitflicker64/followers",
+      "following_url": "https://api.github.com/users/bitflicker64/following{/other_user}",
+      "gists_url": "https://api.github.com/users/bitflicker64/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/bitflicker64/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/bitflicker64/subscriptions",
+      "organizations_url": "https://api.github.com/users/bitflicker64/orgs",
+      "repos_url": "https://api.github.com/users/bitflicker64/repos",
+      "events_url": "https://api.github.com/users/bitflicker64/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/bitflicker64/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "KAI",
+      "company": "Student",
+      "blog": "killl.me",
+      "location": "galaxy",
+      "email": "himnshuverma10152006@gmail.com",
+      "hireable": null,
+      "bio": "having fun building stuff ....",
+      "twitter_username": "Bitflicker64",
+      "public_repos": 66,
+      "public_gists": 0,
+      "followers": 33,
+      "following": 61,
+      "created_at": "2025-05-13T14:18:45Z",
+      "updated_at": "2026-06-23T03:13:02Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030706
+}

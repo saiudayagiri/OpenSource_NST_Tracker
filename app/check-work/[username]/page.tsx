@@ -410,7 +410,7 @@ function ContributionChart({ prs }: { prs: StudentPR[] }) {
             points.map((p, i) => (
               <g key={i} className="group/point">
                 <circle cx={p.x} cy={p.y} r="6" className="fill-purple-500/0 stroke-purple-500/0 cursor-help" />
-                <circle cx={p.x} cy={p.y} r="3.5" className="fill-[#0d0d14] stroke-purple-400 stroke-2 transition-all group-hover/point:r-5 group-hover/point:fill-purple-400" />
+                <circle cx={p.x} cy={p.y} r="3.5" className="fill-[#030712] stroke-purple-400 stroke-2 transition-all group-hover/point:r-5 group-hover/point:fill-purple-400" />
                 {p.value > 0 && (
                   <g className="opacity-0 group-hover/point:opacity-100 transition-opacity pointer-events-none">
                     <rect x={p.x - 14} y={p.y - 22} width="28" height="15" rx="4" className="fill-[#141424] stroke-white/10 stroke-[0.5px]" />
@@ -470,7 +470,7 @@ export default async function CheckWorkUserPage({
   // 1. Rate Limit Error Page
   if (isRateLimited) {
     return (
-      <main className="min-h-screen bg-[#0d0d14] flex flex-col items-center justify-center text-center px-4 py-12">
+      <main className="min-h-screen bg-[#030712] flex flex-col items-center justify-center text-center px-4 py-12">
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-3xl p-8 max-w-md backdrop-blur-md shadow-2xl shadow-black/50">
           <div className="text-4xl mb-4">⏳</div>
           <h1 className="text-xl font-bold text-white mb-3">GitHub API Rate Limit Hit</h1>
@@ -503,7 +503,7 @@ export default async function CheckWorkUserPage({
   // 2. Generic Error or Not Found Page
   if (!profile || genericError) {
     return (
-      <main className="min-h-screen bg-[#0d0d14] flex flex-col items-center justify-center text-center px-4 py-12">
+      <main className="min-h-screen bg-[#030712] flex flex-col items-center justify-center text-center px-4 py-12">
         <div className="bg-white/[0.03] border border-white/[0.08] rounded-3xl p-8 max-w-md backdrop-blur-md">
           <div className="text-4xl mb-4">🔍</div>
           <h1 className="text-xl font-bold text-white mb-3">GitHub User Not Found</h1>
@@ -535,7 +535,7 @@ export default async function CheckWorkUserPage({
   const badges = getBadges(allPRs, counts.mergedPRs);
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       {/* Navigation back */}
       <div className="max-w-4xl mx-auto px-4 pt-6">
         <Link 

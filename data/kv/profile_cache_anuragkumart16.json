@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.701Z",
+    "profile": {
+      "login": "anuragkumart16",
+      "id": 114322758,
+      "node_id": "U_kgDOBtBtRg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/114322758?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/anuragkumart16",
+      "html_url": "https://github.com/anuragkumart16",
+      "followers_url": "https://api.github.com/users/anuragkumart16/followers",
+      "following_url": "https://api.github.com/users/anuragkumart16/following{/other_user}",
+      "gists_url": "https://api.github.com/users/anuragkumart16/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/anuragkumart16/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/anuragkumart16/subscriptions",
+      "organizations_url": "https://api.github.com/users/anuragkumart16/orgs",
+      "repos_url": "https://api.github.com/users/anuragkumart16/repos",
+      "events_url": "https://api.github.com/users/anuragkumart16/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/anuragkumart16/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Anurag Kumar Tiwari",
+      "company": null,
+      "blog": "https://anuragkumartiwari.vercel.app/",
+      "location": "Gorakhpur, Uttar Pradesh , India",
+      "email": null,
+      "hireable": true,
+      "bio": "Full Stack Engineer and ML Developer\r\n",
+      "twitter_username": null,
+      "public_repos": 65,
+      "public_gists": 0,
+      "followers": 27,
+      "following": 47,
+      "created_at": "2022-09-25T02:55:51Z",
+      "updated_at": "2026-06-07T15:56:11Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030701
+}

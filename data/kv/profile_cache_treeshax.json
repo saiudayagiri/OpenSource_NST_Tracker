@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.693Z",
+    "profile": {
+      "login": "treeshax",
+      "id": 218747634,
+      "node_id": "U_kgDODQnS8g",
+      "avatar_url": "https://avatars.githubusercontent.com/u/218747634?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/treeshax",
+      "html_url": "https://github.com/treeshax",
+      "followers_url": "https://api.github.com/users/treeshax/followers",
+      "following_url": "https://api.github.com/users/treeshax/following{/other_user}",
+      "gists_url": "https://api.github.com/users/treeshax/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/treeshax/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/treeshax/subscriptions",
+      "organizations_url": "https://api.github.com/users/treeshax/orgs",
+      "repos_url": "https://api.github.com/users/treeshax/repos",
+      "events_url": "https://api.github.com/users/treeshax/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/treeshax/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Harshita Jain",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 18,
+      "public_gists": 0,
+      "followers": 2,
+      "following": 5,
+      "created_at": "2025-07-01T09:00:22Z",
+      "updated_at": "2026-05-19T05:47:13Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030693
+}

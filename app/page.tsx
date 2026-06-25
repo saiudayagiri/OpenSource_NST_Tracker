@@ -17,7 +17,8 @@ export default async function Home() {
   const totalSelections = achievers.reduce((n, a) => n + a.programs.length, 0);
 
   // Stats from summary cache
-  const totalContributors = cache?.summaries.length ?? 0;
+  const totalStudents = cache?.summaries.length ?? 0;
+  const activeContributorsCount = cache?.summaries.filter((s) => s.totalPRs > 0 || (s.issuesCount ?? 0) > 0).length ?? 0;
   const totalMerged = cache?.summaries.reduce((s, c) => s + c.mergedPRs, 0) ?? 0;
   const totalPRs = cache?.summaries.reduce((s, c) => s + c.totalPRs, 0) ?? 0;
 
@@ -25,7 +26,7 @@ export default async function Home() {
   const topContributors = cache?.summaries.slice(0, 5) ?? [];
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-purple-600/8 blur-[120px] rounded-full" />
@@ -36,7 +37,7 @@ export default async function Home() {
       <div className="relative flex flex-col items-center justify-center text-center px-4 pt-20 pb-10">
         <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-xs text-purple-300/70 mb-8">
           <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
-          {totalContributors > 0 ? `${totalContributors} active contributors` : 'Open Source at NST'}
+          {activeContributorsCount > 0 ? `${activeContributorsCount} active contributor${activeContributorsCount !== 1 ? 's' : ''}` : 'Open Source at NST'}
         </div>
 
         <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight">
@@ -72,12 +73,13 @@ export default async function Home() {
 
       {/* Live stats strip */}
       {totalPRs > 0 && (
-        <div className="relative max-w-3xl mx-auto px-4 mb-12">
-          <div className="grid grid-cols-3 gap-3">
+        <div className="relative max-w-4xl mx-auto px-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
+              { label: 'Total Students', value: totalStudents, color: 'text-white/70' },
+              { label: 'Active Contributors', value: activeContributorsCount, color: 'text-purple-400' },
               { label: 'Total PRs', value: totalPRs, color: 'text-white' },
               { label: 'Merged', value: totalMerged, color: 'text-emerald-400' },
-              { label: 'Contributors', value: totalContributors, color: 'text-purple-400' },
             ].map((s) => (
               <div key={s.label} className="bg-white/[0.03] border border-white/[0.07] rounded-2xl px-4 py-5 text-center">
                 <div className={`text-3xl font-bold tabular-nums ${s.color}`}>{s.value}</div>
@@ -102,7 +104,7 @@ export default async function Home() {
               <Link
                 key={s.profile.login}
                 href={`/contributors/${s.profile.login}`}
-                className="group flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.025] border border-white/[0.07] hover:bg-white/[0.05] hover:border-purple-500/20 transition-all"
+                className="group flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.025] border border-white/[0.07] sys-card-hover"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={s.profile.avatar_url} alt={s.profile.login} className="w-8 h-8 rounded-full ring-1 ring-white/10 group-hover:ring-purple-500/30 transition-all" />

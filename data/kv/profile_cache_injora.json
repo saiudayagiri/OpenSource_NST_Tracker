@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:59:36.149Z",
+    "profile": {
+      "login": "Injora",
+      "id": 217072297,
+      "node_id": "U_kgDODPBCqQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/217072297?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Injora",
+      "html_url": "https://github.com/Injora",
+      "followers_url": "https://api.github.com/users/Injora/followers",
+      "following_url": "https://api.github.com/users/Injora/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Injora/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Injora/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Injora/subscriptions",
+      "organizations_url": "https://api.github.com/users/Injora/orgs",
+      "repos_url": "https://api.github.com/users/Injora/repos",
+      "events_url": "https://api.github.com/users/Injora/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Injora/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Injora",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": "injoraman@gmail.com",
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 81,
+      "public_gists": 0,
+      "followers": 8,
+      "following": 12,
+      "created_at": "2025-06-19T14:30:11Z",
+      "updated_at": "2026-05-19T16:06:34Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784973576149
+}

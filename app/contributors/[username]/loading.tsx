@@ -1,6 +1,6 @@
 export default function ContributorLoading() {
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       <div className="max-w-4xl mx-auto px-4 pt-6">
         <div className="h-4 w-28 bg-white/5 rounded-full animate-pulse" />
       </div>

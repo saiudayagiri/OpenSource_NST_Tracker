@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.686Z",
+    "profile": {
+      "login": "Shubhansh28",
+      "id": 100535244,
+      "node_id": "U_kgDOBf4LzA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/100535244?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Shubhansh28",
+      "html_url": "https://github.com/Shubhansh28",
+      "followers_url": "https://api.github.com/users/Shubhansh28/followers",
+      "following_url": "https://api.github.com/users/Shubhansh28/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Shubhansh28/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Shubhansh28/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Shubhansh28/subscriptions",
+      "organizations_url": "https://api.github.com/users/Shubhansh28/orgs",
+      "repos_url": "https://api.github.com/users/Shubhansh28/repos",
+      "events_url": "https://api.github.com/users/Shubhansh28/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Shubhansh28/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Shubh kesharwani",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 26,
+      "public_gists": 0,
+      "followers": 1,
+      "following": 0,
+      "created_at": "2022-02-27T19:35:11Z",
+      "updated_at": "2026-06-09T22:40:20Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030686
+}

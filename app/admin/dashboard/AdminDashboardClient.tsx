@@ -121,7 +121,7 @@ function FlagModal({ pr, onClose, onFlagged }: FlagModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div className="bg-[#13131f] border border-white/[0.1] rounded-2xl w-full max-w-md p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+      <div className="bg-[#0a0f1d] border border-white/[0.1] rounded-2xl w-full max-w-md p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
         <h3 className="text-white font-semibold text-lg mb-1">Flag PR</h3>
         <p className="text-white/35 text-sm mb-5 leading-relaxed truncate" title={pr.title}>{pr.title}</p>
 
@@ -568,14 +568,14 @@ export default function AdminDashboardClient({ flaggedPRs: initialFlagged, revie
   });
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       {/* Glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-purple-600/6 blur-[120px] rounded-full" />
       </div>
 
       {/* Header */}
-      <header className="relative border-b border-white/[0.07] bg-[#0d0d14]/80 backdrop-blur-sm sticky top-0 z-30">
+      <header className="relative border-b border-white/[0.07] bg-[#030712]/80 backdrop-blur-sm sticky top-0 z-30">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500/30 to-blue-500/20 border border-purple-500/30 flex items-center justify-center">
@@ -694,7 +694,7 @@ export default function AdminDashboardClient({ flaggedPRs: initialFlagged, revie
                   {isDropdownOpen && (
                     <>
                       <div className="fixed inset-0 z-10" onClick={() => setIsDropdownOpen(false)} />
-                      <div className="absolute left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-[#13131f] border border-white/[0.15] rounded-xl shadow-2xl z-20 scrollbar-thin">
+                      <div className="absolute left-0 right-0 mt-1.5 max-h-60 overflow-y-auto bg-[#0a0f1d] border border-white/[0.15] rounded-xl shadow-2xl z-20 scrollbar-thin">
                         {students.filter(s => s.toLowerCase().includes(searchQuery.toLowerCase())).length > 0 ? (
                           students
                             .filter(s => s.toLowerCase().includes(searchQuery.toLowerCase()))

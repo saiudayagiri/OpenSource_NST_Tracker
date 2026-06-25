@@ -373,7 +373,7 @@ export default async function ContributorPage({
   const badges = getBadges(allPRs, lifetimeMergedCount);
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       {/* Back nav */}
       <div className="max-w-4xl mx-auto px-4 pt-6">
         <Link 
@@ -788,7 +788,7 @@ function ContributionChart({ prs }: { prs: StudentPR[] }) {
                   cx={p.x}
                   cy={p.y}
                   r="3.5"
-                  className="fill-[#0d0d14] stroke-purple-400 stroke-2 transition-all group-hover/point:r-5 group-hover/point:fill-purple-400"
+                  className="fill-[#030712] stroke-purple-400 stroke-2 transition-all group-hover/point:r-5 group-hover/point:fill-purple-400"
                 />
                 {/* Value tooltip label displayed on hover */}
                 {p.value > 0 && (

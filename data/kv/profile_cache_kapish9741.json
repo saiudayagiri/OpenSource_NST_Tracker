@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.707Z",
+    "profile": {
+      "login": "kapish9741",
+      "id": 84222013,
+      "node_id": "MDQ6VXNlcjg0MjIyMDEz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84222013?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/kapish9741",
+      "html_url": "https://github.com/kapish9741",
+      "followers_url": "https://api.github.com/users/kapish9741/followers",
+      "following_url": "https://api.github.com/users/kapish9741/following{/other_user}",
+      "gists_url": "https://api.github.com/users/kapish9741/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/kapish9741/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/kapish9741/subscriptions",
+      "organizations_url": "https://api.github.com/users/kapish9741/orgs",
+      "repos_url": "https://api.github.com/users/kapish9741/repos",
+      "events_url": "https://api.github.com/users/kapish9741/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/kapish9741/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Kapish Rohilla",
+      "company": null,
+      "blog": "https://kapishrohilla.vercel.app/",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": "Aspiring Front-End Developer | Passionate about building clean, responsive, and interactive UIs using React & modern web technologies.",
+      "twitter_username": null,
+      "public_repos": 34,
+      "public_gists": 0,
+      "followers": 2,
+      "following": 4,
+      "created_at": "2021-05-15T07:03:45Z",
+      "updated_at": "2026-06-23T16:39:09Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030707
+}

@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.685Z",
+    "profile": {
+      "login": "shiavm006",
+      "id": 184618879,
+      "node_id": "U_kgDOCwEPfw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/184618879?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/shiavm006",
+      "html_url": "https://github.com/shiavm006",
+      "followers_url": "https://api.github.com/users/shiavm006/followers",
+      "following_url": "https://api.github.com/users/shiavm006/following{/other_user}",
+      "gists_url": "https://api.github.com/users/shiavm006/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/shiavm006/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/shiavm006/subscriptions",
+      "organizations_url": "https://api.github.com/users/shiavm006/orgs",
+      "repos_url": "https://api.github.com/users/shiavm006/repos",
+      "events_url": "https://api.github.com/users/shiavm006/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/shiavm006/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Shivam Mittal",
+      "company": null,
+      "blog": "https://shivammittal-nine.vercel.app/",
+      "location": "Gurgaon / India ",
+      "email": "shivammittal42006@gmail.com",
+      "hireable": true,
+      "bio": "Contributing in Open Source Projects \r\nexploring my path and enhancing the skills \r\n",
+      "twitter_username": null,
+      "public_repos": 42,
+      "public_gists": 0,
+      "followers": 10,
+      "following": 21,
+      "created_at": "2024-10-11T09:38:16Z",
+      "updated_at": "2026-06-14T18:26:20Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030685
+}

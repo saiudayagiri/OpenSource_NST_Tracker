@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-18T12:19:24.147Z",
+    "cachedAt": "2026-06-25T09:47:50.694Z",
     "profile": {
       "login": "shubhammittal2241",
       "id": 226664435,
@@ -34,7 +34,7 @@
       "followers": 0,
       "following": 0,
       "created_at": "2025-08-15T06:52:30Z",
-      "updated_at": "2026-05-23T04:24:25Z"
+      "updated_at": "2026-06-19T19:57:39Z"
     },
     "prs": [
       {
@@ -468,5 +468,5 @@
     ],
     "issues": []
   },
-  "expiresAt": 1784377164147
+  "expiresAt": 1784972870694
 }

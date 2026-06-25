@@ -26,7 +26,7 @@ export default function CheckWorkLandingPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0d0d14] flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
+    <main className="min-h-screen bg-[#030712] flex flex-col items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Background glow effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-purple-600/10 blur-[130px] rounded-full" />
@@ -66,7 +66,7 @@ export default function CheckWorkLandingPage() {
               </span>
               <a
                 href="/api/auth/github"
-                className="bg-[#24292e] border border-white/[0.08] hover:bg-[#2f363d] hover:border-white/[0.15] text-white px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all shrink-0"
+                className="bg-[#161b22] border border-white/[0.08] hover:bg-[#21262d] hover:border-white/[0.15] text-white px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all shrink-0"
               >
                 Sign In
               </a>

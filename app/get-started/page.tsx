@@ -140,7 +140,7 @@ const guidelines = [
 
 export default function GetStartedPage() {
   return (
-    <main className="min-h-screen bg-[#0d0d14] text-white relative">
+    <main className="min-h-screen bg-[#030712] text-white relative">
       {/* Visual background lines / grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
 
@@ -380,7 +380,7 @@ export default function GetStartedPage() {
             {onboardingSteps.map((step) => (
               <div key={step.n} className="relative group">
                 {/* Timeline node */}
-                <div className="absolute -left-[42px] top-0 w-6 h-6 rounded-full bg-[#0d0d14] border-2 border-emerald-400 flex items-center justify-center text-[10px] font-bold text-emerald-400 group-hover:bg-emerald-400 group-hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(52,211,153,0.2)]" />
+                <div className="absolute -left-[42px] top-0 w-6 h-6 rounded-full bg-[#030712] border-2 border-emerald-400 flex items-center justify-center text-[10px] font-bold text-emerald-400 group-hover:bg-emerald-400 group-hover:text-black transition-all duration-300 shadow-[0_0_10px_rgba(52,211,153,0.2)]" />
                 
                 <div className="space-y-2">
                   <h3 className="font-bold text-white/95 text-base md:text-lg flex items-center gap-2 group-hover:text-emerald-400 transition-colors">

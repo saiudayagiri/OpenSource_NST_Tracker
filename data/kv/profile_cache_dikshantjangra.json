@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.713Z",
+    "profile": {
+      "login": "DikshantJangra",
+      "id": 76596000,
+      "node_id": "MDQ6VXNlcjc2NTk2MDAw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76596000?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/DikshantJangra",
+      "html_url": "https://github.com/DikshantJangra",
+      "followers_url": "https://api.github.com/users/DikshantJangra/followers",
+      "following_url": "https://api.github.com/users/DikshantJangra/following{/other_user}",
+      "gists_url": "https://api.github.com/users/DikshantJangra/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/DikshantJangra/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/DikshantJangra/subscriptions",
+      "organizations_url": "https://api.github.com/users/DikshantJangra/orgs",
+      "repos_url": "https://api.github.com/users/DikshantJangra/repos",
+      "events_url": "https://api.github.com/users/DikshantJangra/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/DikshantJangra/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Dikshant",
+      "company": null,
+      "blog": "https://github.com/DikshantJangra",
+      "location": null,
+      "email": null,
+      "hireable": true,
+      "bio": "Web Developer\r\nProgrammer\r\nGitHub Contributor",
+      "twitter_username": null,
+      "public_repos": 44,
+      "public_gists": 0,
+      "followers": 14,
+      "following": 20,
+      "created_at": "2020-12-25T17:52:55Z",
+      "updated_at": "2026-06-18T15:58:22Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030713
+}

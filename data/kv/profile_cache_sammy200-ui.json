@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.709Z",
+    "profile": {
+      "login": "sammy200-ui",
+      "id": 187490777,
+      "node_id": "U_kgDOCyzh2Q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/187490777?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/sammy200-ui",
+      "html_url": "https://github.com/sammy200-ui",
+      "followers_url": "https://api.github.com/users/sammy200-ui/followers",
+      "following_url": "https://api.github.com/users/sammy200-ui/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sammy200-ui/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sammy200-ui/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sammy200-ui/subscriptions",
+      "organizations_url": "https://api.github.com/users/sammy200-ui/orgs",
+      "repos_url": "https://api.github.com/users/sammy200-ui/repos",
+      "events_url": "https://api.github.com/users/sammy200-ui/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sammy200-ui/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Sameer",
+      "company": null,
+      "blog": "https://my-portfolio-indol-two-46.vercel.app/",
+      "location": "India",
+      "email": "pawar96sameer@gmail.com",
+      "hireable": null,
+      "bio": "Not a wizard, just good at Googling.",
+      "twitter_username": null,
+      "public_repos": 44,
+      "public_gists": 0,
+      "followers": 8,
+      "following": 11,
+      "created_at": "2024-11-06T07:41:47Z",
+      "updated_at": "2026-06-21T18:15:27Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030709
+}

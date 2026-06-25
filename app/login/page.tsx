@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <main className="min-h-screen bg-[#0d0d14] flex flex-col items-center justify-center px-4 relative overflow-hidden">
+    <main className="min-h-screen bg-[#030712] flex flex-col items-center justify-center px-4 relative overflow-hidden">
       {/* Background glow effects */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-purple-600/10 blur-[130px] rounded-full" />

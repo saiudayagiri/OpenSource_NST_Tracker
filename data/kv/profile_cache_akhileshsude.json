@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.699Z",
+    "profile": {
+      "login": "akhileshsude",
+      "id": 227738087,
+      "node_id": "U_kgDODZMB5w",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227738087?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/akhileshsude",
+      "html_url": "https://github.com/akhileshsude",
+      "followers_url": "https://api.github.com/users/akhileshsude/followers",
+      "following_url": "https://api.github.com/users/akhileshsude/following{/other_user}",
+      "gists_url": "https://api.github.com/users/akhileshsude/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/akhileshsude/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/akhileshsude/subscriptions",
+      "organizations_url": "https://api.github.com/users/akhileshsude/orgs",
+      "repos_url": "https://api.github.com/users/akhileshsude/repos",
+      "events_url": "https://api.github.com/users/akhileshsude/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/akhileshsude/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Akhilesh Sude",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": "akhileshsude656@gmail.com",
+      "hireable": null,
+      "bio": "1st year student @ NST, Pune.",
+      "twitter_username": null,
+      "public_repos": 19,
+      "public_gists": 0,
+      "followers": 4,
+      "following": 8,
+      "created_at": "2025-08-21T04:55:28Z",
+      "updated_at": "2025-12-12T16:30:05Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030699
+}

@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.700Z",
+    "profile": {
+      "login": "amimishra990-cpu",
+      "id": 226689100,
+      "node_id": "U_kgDODYMATA",
+      "avatar_url": "https://avatars.githubusercontent.com/u/226689100?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/amimishra990-cpu",
+      "html_url": "https://github.com/amimishra990-cpu",
+      "followers_url": "https://api.github.com/users/amimishra990-cpu/followers",
+      "following_url": "https://api.github.com/users/amimishra990-cpu/following{/other_user}",
+      "gists_url": "https://api.github.com/users/amimishra990-cpu/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/amimishra990-cpu/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/amimishra990-cpu/subscriptions",
+      "organizations_url": "https://api.github.com/users/amimishra990-cpu/orgs",
+      "repos_url": "https://api.github.com/users/amimishra990-cpu/repos",
+      "events_url": "https://api.github.com/users/amimishra990-cpu/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/amimishra990-cpu/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Hollow Intent",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 16,
+      "public_gists": 1,
+      "followers": 3,
+      "following": 3,
+      "created_at": "2025-08-15T10:09:43Z",
+      "updated_at": "2026-06-14T16:11:29Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030700
+}

@@ -72,7 +72,7 @@ export function ShareButton({
       // 1. Draw Background Gradient
       const bgGrad = ctx.createRadialGradient(400, 225, 50, 400, 225, 450);
       bgGrad.addColorStop(0, '#1a1235'); // Deep purple
-      bgGrad.addColorStop(1, '#0d0d14'); // Fixed dark background
+      bgGrad.addColorStop(1, '#030712'); // Fixed dark background
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 800, 450);
 
@@ -251,8 +251,8 @@ export function ShareButton({
 
       {/* Modal Backdrop & Body */}
       {isOpen && (
-        <div className="fixed inset-0 bg-[#0d0d14]/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
-          <div className="relative w-full max-w-lg bg-[#12121a] border border-white/[0.08] rounded-2xl p-6 shadow-2xl flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-[#030712]/90 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-lg bg-[#0a0f1d] border border-white/[0.08] rounded-2xl p-6 shadow-2xl flex flex-col gap-6 animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-white/[0.06] pb-3">
               <div>

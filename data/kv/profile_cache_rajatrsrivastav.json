@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.678Z",
+    "profile": {
+      "login": "rajatrsrivastav",
+      "id": 205837121,
+      "node_id": "U_kgDODETTQQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/205837121?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/rajatrsrivastav",
+      "html_url": "https://github.com/rajatrsrivastav",
+      "followers_url": "https://api.github.com/users/rajatrsrivastav/followers",
+      "following_url": "https://api.github.com/users/rajatrsrivastav/following{/other_user}",
+      "gists_url": "https://api.github.com/users/rajatrsrivastav/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/rajatrsrivastav/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/rajatrsrivastav/subscriptions",
+      "organizations_url": "https://api.github.com/users/rajatrsrivastav/orgs",
+      "repos_url": "https://api.github.com/users/rajatrsrivastav/repos",
+      "events_url": "https://api.github.com/users/rajatrsrivastav/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/rajatrsrivastav/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Rajat Srivastav",
+      "company": null,
+      "blog": "rajatsrivastav.site",
+      "location": "Mumbai",
+      "email": "rajatrsrivastav810@gmail.com",
+      "hireable": true,
+      "bio": "Fullstack Developer with a love for open source. Always looking for interesting projects to contribute to. Let's connect and build something great!",
+      "twitter_username": null,
+      "public_repos": 40,
+      "public_gists": 0,
+      "followers": 3,
+      "following": 15,
+      "created_at": "2025-04-01T20:23:43Z",
+      "updated_at": "2026-06-01T05:06:12Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030678
+}

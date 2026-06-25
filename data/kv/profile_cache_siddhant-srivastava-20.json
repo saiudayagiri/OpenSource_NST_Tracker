@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.716Z",
+    "profile": {
+      "login": "Siddhant-Srivastava-20",
+      "id": 227227888,
+      "node_id": "U_kgDODYs48A",
+      "avatar_url": "https://avatars.githubusercontent.com/u/227227888?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Siddhant-Srivastava-20",
+      "html_url": "https://github.com/Siddhant-Srivastava-20",
+      "followers_url": "https://api.github.com/users/Siddhant-Srivastava-20/followers",
+      "following_url": "https://api.github.com/users/Siddhant-Srivastava-20/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Siddhant-Srivastava-20/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Siddhant-Srivastava-20/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Siddhant-Srivastava-20/subscriptions",
+      "organizations_url": "https://api.github.com/users/Siddhant-Srivastava-20/orgs",
+      "repos_url": "https://api.github.com/users/Siddhant-Srivastava-20/repos",
+      "events_url": "https://api.github.com/users/Siddhant-Srivastava-20/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Siddhant-Srivastava-20/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Siddhant Srivastava",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 13,
+      "public_gists": 0,
+      "followers": 0,
+      "following": 0,
+      "created_at": "2025-08-18T16:46:04Z",
+      "updated_at": "2026-04-27T13:19:15Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030716
+}

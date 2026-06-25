@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:59:32.030Z",
+    "profile": {
+      "login": "geetxnshgoyal",
+      "id": 84733202,
+      "node_id": "MDQ6VXNlcjg0NzMzMjAy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84733202?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/geetxnshgoyal",
+      "html_url": "https://github.com/geetxnshgoyal",
+      "followers_url": "https://api.github.com/users/geetxnshgoyal/followers",
+      "following_url": "https://api.github.com/users/geetxnshgoyal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/geetxnshgoyal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/geetxnshgoyal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/geetxnshgoyal/subscriptions",
+      "organizations_url": "https://api.github.com/users/geetxnshgoyal/orgs",
+      "repos_url": "https://api.github.com/users/geetxnshgoyal/repos",
+      "events_url": "https://api.github.com/users/geetxnshgoyal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/geetxnshgoyal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Geetansh Goyal",
+      "company": null,
+      "blog": "",
+      "location": "Bengaluru",
+      "email": null,
+      "hireable": true,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 64,
+      "public_gists": 0,
+      "followers": 9,
+      "following": 5,
+      "created_at": "2021-05-24T16:39:26Z",
+      "updated_at": "2026-06-11T18:48:49Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784973572030
+}

@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:33:50.713Z",
+    "profile": {
+      "login": "abhiiiiiii-21",
+      "id": 136153183,
+      "node_id": "U_kgDOCB2IXw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/136153183?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/abhiiiiiii-21",
+      "html_url": "https://github.com/abhiiiiiii-21",
+      "followers_url": "https://api.github.com/users/abhiiiiiii-21/followers",
+      "following_url": "https://api.github.com/users/abhiiiiiii-21/following{/other_user}",
+      "gists_url": "https://api.github.com/users/abhiiiiiii-21/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/abhiiiiiii-21/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/abhiiiiiii-21/subscriptions",
+      "organizations_url": "https://api.github.com/users/abhiiiiiii-21/orgs",
+      "repos_url": "https://api.github.com/users/abhiiiiiii-21/repos",
+      "events_url": "https://api.github.com/users/abhiiiiiii-21/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/abhiiiiiii-21/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Abhishek Kumar Patel",
+      "company": null,
+      "blog": "",
+      "location": "DELHI",
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 34,
+      "public_gists": 0,
+      "followers": 3,
+      "following": 5,
+      "created_at": "2023-06-10T07:01:35Z",
+      "updated_at": "2026-06-05T14:49:34Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784972030713
+}

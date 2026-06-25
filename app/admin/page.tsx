@@ -33,7 +33,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#0d0d14] flex items-center justify-center px-4">
+    <main className="min-h-screen bg-[#030712] flex items-center justify-center px-4">
       {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full" />

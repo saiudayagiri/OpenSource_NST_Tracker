@@ -1,0 +1,43 @@
+{
+  "value": {
+    "cachedAt": "2026-06-25T09:59:36.517Z",
+    "profile": {
+      "login": "Parth-co79",
+      "id": 222976821,
+      "node_id": "U_kgDODUpbNQ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/222976821?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Parth-co79",
+      "html_url": "https://github.com/Parth-co79",
+      "followers_url": "https://api.github.com/users/Parth-co79/followers",
+      "following_url": "https://api.github.com/users/Parth-co79/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Parth-co79/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Parth-co79/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Parth-co79/subscriptions",
+      "organizations_url": "https://api.github.com/users/Parth-co79/orgs",
+      "repos_url": "https://api.github.com/users/Parth-co79/repos",
+      "events_url": "https://api.github.com/users/Parth-co79/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Parth-co79/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false,
+      "name": "Parth Kadukar",
+      "company": null,
+      "blog": "",
+      "location": null,
+      "email": null,
+      "hireable": null,
+      "bio": null,
+      "twitter_username": null,
+      "public_repos": 11,
+      "public_gists": 0,
+      "followers": 4,
+      "following": 9,
+      "created_at": "2025-07-26T13:08:56Z",
+      "updated_at": "2026-06-07T16:46:40Z"
+    },
+    "prs": [],
+    "issues": []
+  },
+  "expiresAt": 1784973576517
+}

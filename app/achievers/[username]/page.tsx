@@ -59,7 +59,7 @@ export default async function AchieverPage({ params }: { params: Promise<{ usern
   const repoCount   = new Set(prs.map(pr => repoFromUrl(pr.repository_url))).size;
 
   return (
-    <main className="min-h-screen bg-[#0d0d14]">
+    <main className="min-h-screen bg-[#030712]">
       <div className="max-w-4xl mx-auto px-4 pt-6">
         <Link href="/achievers" className="inline-flex items-center gap-2 text-white/30 hover:text-white/70 transition-colors text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
