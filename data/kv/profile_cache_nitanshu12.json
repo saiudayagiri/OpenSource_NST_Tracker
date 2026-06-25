@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:54:31.288Z",
+    "cachedAt": "2026-06-25T13:25:21.845Z",
     "profile": {
       "login": "Nitanshu12",
       "id": 184644576,
@@ -34,7 +34,7 @@
       "followers": 0,
       "following": 2,
       "created_at": "2024-10-11T11:43:02Z",
-      "updated_at": "2026-04-29T07:37:24Z"
+      "updated_at": "2026-06-24T16:10:14Z"
     },
     "prs": [
       {
@@ -1996,5 +1996,5 @@
       }
     ]
   },
-  "expiresAt": 1784973271289
+  "expiresAt": 1784985921845
 }

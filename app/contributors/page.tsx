@@ -78,7 +78,21 @@ function ContributorCard({
             {summary.profile.name ?? summary.profile.login}
           </h3>
           <p className="text-white/35 text-xs mt-0.5 truncate">@{summary.profile.login}</p>
-          <p className="text-white/40 text-sm mt-1">
+          {(summary.year || summary.campus) && (
+            <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+              {summary.year && (
+                <span className="text-[9px] px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium">
+                  {summary.year}
+                </span>
+              )}
+              {summary.campus && (
+                <span className="text-[9px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">
+                  {summary.campus}
+                </span>
+              )}
+            </div>
+          )}
+          <p className="text-white/40 text-sm mt-2">
             {summary.totalPRs} contribution{summary.totalPRs !== 1 ? 's' : ''}
           </p>
         </div>

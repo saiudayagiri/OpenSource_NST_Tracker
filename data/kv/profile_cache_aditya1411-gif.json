@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:33:50.698Z",
+    "cachedAt": "2026-06-25T13:25:21.936Z",
     "profile": {
       "login": "aditya1411-gif",
       "avatar_url": "https://github.com/aditya1411-gif.png",
@@ -14,10 +14,10 @@
       "location": null,
       "blog": null,
       "twitter_username": null,
-      "created_at": "2026-06-23T17:42:06.261Z"
+      "created_at": "2026-06-25T13:25:03.288Z"
     },
     "prs": [],
     "issues": []
   },
-  "expiresAt": 1784972030698
+  "expiresAt": 1784985921936
 }

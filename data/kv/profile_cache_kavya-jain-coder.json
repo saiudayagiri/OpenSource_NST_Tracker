@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:51:49.525Z",
+    "cachedAt": "2026-06-25T13:29:05.132Z",
     "profile": {
       "login": "Kavya-Jain-coder",
       "id": 172236025,
@@ -34,7 +34,7 @@
       "followers": 0,
       "following": 1,
       "created_at": "2024-06-10T04:03:11Z",
-      "updated_at": "2026-05-24T19:00:43Z"
+      "updated_at": "2026-06-23T21:31:12Z"
     },
     "prs": [
       {
@@ -2074,5 +2074,5 @@
     ],
     "issues": []
   },
-  "expiresAt": 1784973109526
+  "expiresAt": 1784986145133
 }

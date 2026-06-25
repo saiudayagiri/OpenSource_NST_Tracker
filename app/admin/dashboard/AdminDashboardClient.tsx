@@ -865,20 +865,34 @@ export default function AdminDashboardClient({ flaggedPRs: initialFlagged, revie
 
 // ─── Students Tab ─────────────────────────────────────────────────────────────
 
+interface Student {
+  github: string;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
+}
+
 function StudentsTab() {
-  const [students, setStudents] = useState<string[]>([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [newGithub, setNewGithub] = useState('');
+  const [newYear, setNewYear] = useState<'1st year' | '2nd year' | '3rd year' | '4th year' | ''>('');
+  const [newCampus, setNewCampus] = useState<'Rishihood' | 'ADYPU' | 'SVYASA' | ''>('');
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  // Editing state
+  const [editingGithub, setEditingGithub] = useState<string | null>(null);
+  const [editYear, setEditYear] = useState<'1st year' | '2nd year' | '3rd year' | '4th year' | ''>('');
+  const [editCampus, setEditCampus] = useState<'Rishihood' | 'ADYPU' | 'SVYASA' | ''>('');
+  const [saving, setSaving] = useState(false);
 
   async function load() {
     setLoading(true);
     const res = await fetch('/api/admin/students');
     if (res.ok) {
       const data = await res.json();
-      setStudents(data.map((s: { github: string }) => s.github));
+      setStudents(data);
     }
     setLoading(false);
   }
@@ -891,12 +905,50 @@ function StudentsTab() {
     setAdding(true); setError(''); setSuccess('');
     const res = await fetch('/api/admin/students', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ github: newGithub.trim() }),
+      body: JSON.stringify({
+        github: newGithub.trim(),
+        year: newYear || undefined,
+        campus: newCampus || undefined
+      }),
     });
     const data = await res.json();
-    if (res.ok) { setSuccess(`@${newGithub.trim()} added!`); setNewGithub(''); await load(); }
+    if (res.ok) {
+      setSuccess(`@${newGithub.trim()} added!`);
+      setNewGithub('');
+      setNewYear('');
+      setNewCampus('');
+      await load();
+    }
     else setError(data.error ?? 'Failed to add');
     setAdding(false);
+  }
+
+  function startEdit(student: Student) {
+    setEditingGithub(student.github);
+    setEditYear(student.year || '');
+    setEditCampus(student.campus || '');
+  }
+
+  async function executeUpdate(github: string) {
+    setSaving(true);
+    setError(''); setSuccess('');
+    const res = await fetch('/api/admin/students', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        github,
+        year: editYear || undefined,
+        campus: editCampus || undefined
+      }),
+    });
+    setSaving(false);
+    if (res.ok) {
+      setSuccess(`Updated @${github}`);
+      setEditingGithub(null);
+      await load();
+    } else {
+      setError('Failed to update student details');
+    }
   }
 
   const [confirmRemove, setConfirmRemove] = useState<string | null>(null);
@@ -913,15 +965,33 @@ function StudentsTab() {
     <div>
       <div className="mb-6">
         <h2 className="text-white font-semibold">Tracked Students</h2>
-        <p className="text-white/35 text-sm mt-0.5">Add or remove GitHub usernames from the contributor leaderboard.</p>
+        <p className="text-white/35 text-sm mt-0.5">Add or remove GitHub usernames and assign year/campus labels.</p>
       </div>
 
-      <form onSubmit={handleAdd} className="flex gap-3 mb-6">
+      <form onSubmit={handleAdd} className="flex flex-col md:flex-row gap-3 mb-6">
         <input type="text" value={newGithub} onChange={(e) => setNewGithub(e.target.value)}
           placeholder="GitHub username" id="new-student-input"
           className="flex-1 bg-white/[0.04] border border-white/[0.1] rounded-xl px-4 py-2.5 text-white placeholder-white/20 text-sm focus:outline-none focus:border-purple-500/40" />
+        
+        <select value={newYear} onChange={(e) => setNewYear(e.target.value as any)}
+          className="bg-[#0f172a] border border-white/[0.1] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500/40 cursor-pointer">
+          <option value="">Select Year</option>
+          <option value="1st year">1st Year</option>
+          <option value="2nd year">2nd Year</option>
+          <option value="3rd year">3rd Year</option>
+          <option value="4th year">4th Year</option>
+        </select>
+
+        <select value={newCampus} onChange={(e) => setNewCampus(e.target.value as any)}
+          className="bg-[#0f172a] border border-white/[0.1] rounded-xl px-3 py-2.5 text-white text-sm focus:outline-none focus:border-purple-500/40 cursor-pointer">
+          <option value="">Select Campus</option>
+          <option value="Rishihood">Rishihood</option>
+          <option value="ADYPU">ADYPU</option>
+          <option value="SVYASA">SVYASA</option>
+        </select>
+
         <button type="submit" disabled={adding || !newGithub.trim()} id="add-student-btn"
-          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 disabled:opacity-40 text-white font-semibold px-5 py-2.5 rounded-xl transition-all text-sm">
+          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 disabled:opacity-40 text-white font-semibold px-5 py-2.5 rounded-xl transition-all text-sm cursor-pointer">
           {adding ? 'Adding…' : '+ Add'}
         </button>
       </form>
@@ -934,33 +1004,90 @@ function StudentsTab() {
       ) : (
         <div className="space-y-2">
           {students.map((s) => {
-            const isConfirming = confirmRemove === s;
+            const isConfirming = confirmRemove === s.github;
+            const isEditing = editingGithub === s.github;
             return (
-              <div key={s} className="group flex items-center justify-between gap-4 bg-white/[0.025] border border-white/[0.07] rounded-xl px-4 py-3 hover:bg-white/[0.04] transition-all">
-                <div className="flex items-center gap-3">
-                  <img src={`https://avatars.githubusercontent.com/${s}?s=32`} alt={s} className="w-8 h-8 rounded-full ring-1 ring-white/10" />
-                  <div>
-                    <p className="text-white/80 text-sm font-medium">@{s}</p>
-                    <a href={`https://github.com/${s}`} target="_blank" rel="noopener noreferrer" className="text-white/25 text-xs hover:text-purple-400 transition-colors">github.com/{s}</a>
+              <div key={s.github} className="group flex flex-col gap-3 bg-white/[0.025] border border-white/[0.07] rounded-xl px-4 py-3 hover:bg-white/[0.04] transition-all">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <img src={`https://avatars.githubusercontent.com/${s.github}?s=32`} alt={s.github} className="w-8 h-8 rounded-full ring-1 ring-white/10" />
+                    <div>
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        <p className="text-white/80 text-sm font-medium">@{s.github}</p>
+                        {s.year && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-400 border border-purple-500/25 font-semibold">
+                            {s.year}
+                          </span>
+                        )}
+                        {s.campus && (
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/25 font-semibold">
+                            {s.campus}
+                          </span>
+                        )}
+                      </div>
+                      <a href={`https://github.com/${s.github}`} target="_blank" rel="noopener noreferrer" className="text-white/25 text-xs hover:text-purple-400 transition-colors">github.com/{s.github}</a>
+                    </div>
                   </div>
+                  {isConfirming ? (
+                    <div className="flex items-center gap-1.5 flex-shrink-0 animate-in fade-in zoom-in-95 duration-150">
+                      <span className="text-xs text-white/40 mr-1 hidden xs:inline">Are you sure?</span>
+                      <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); executeRemove(s.github); }}
+                        className="text-xs px-2.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-semibold transition-all cursor-pointer shadow-lg shadow-red-900/15">
+                        Delete
+                      </button>
+                      <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmRemove(null); }}
+                        className="text-xs px-2.5 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white/40 hover:text-white/70 transition-all cursor-pointer">
+                        Cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
+                      <button type="button" onClick={() => startEdit(s)}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all opacity-60 sm:opacity-0 group-hover:opacity-100 cursor-pointer">
+                        Edit
+                      </button>
+                      <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmRemove(s.github); }}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-all opacity-60 sm:opacity-0 group-hover:opacity-100 cursor-pointer">
+                        Remove
+                      </button>
+                    </div>
+                  )}
                 </div>
-                {isConfirming ? (
-                  <div className="flex items-center gap-1.5 flex-shrink-0 animate-in fade-in zoom-in-95 duration-150">
-                    <span className="text-xs text-white/40 mr-1 hidden xs:inline">Are you sure?</span>
-                    <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); executeRemove(s); }}
-                      className="text-xs px-2.5 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white font-semibold transition-all cursor-pointer shadow-lg shadow-red-900/15">
-                      Delete
-                    </button>
-                    <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmRemove(null); }}
-                      className="text-xs px-2.5 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white/40 hover:text-white/70 transition-all cursor-pointer">
-                      Cancel
-                    </button>
+
+                {isEditing && (
+                  <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-white/[0.05] animate-in slide-in-from-top-2 duration-150">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[10px] font-semibold text-white/35 uppercase tracking-wider">Year</span>
+                      <select value={editYear} onChange={(e) => setEditYear(e.target.value as any)}
+                        className="bg-[#0f172a] border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-purple-500/40 cursor-pointer">
+                        <option value="">None</option>
+                        <option value="1st year">1st Year</option>
+                        <option value="2nd year">2nd Year</option>
+                        <option value="3rd year">3rd Year</option>
+                        <option value="4th year">4th Year</option>
+                      </select>
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-[10px] font-semibold text-white/35 uppercase tracking-wider">Campus</span>
+                      <select value={editCampus} onChange={(e) => setEditCampus(e.target.value as any)}
+                        className="bg-[#0f172a] border border-white/[0.1] rounded-lg px-2.5 py-1.5 text-white text-xs focus:outline-none focus:border-purple-500/40 cursor-pointer">
+                        <option value="">None</option>
+                        <option value="Rishihood">Rishihood</option>
+                        <option value="ADYPU">ADYPU</option>
+                        <option value="SVYASA">SVYASA</option>
+                      </select>
+                    </div>
+                    <div className="flex items-end gap-1.5 h-full pt-5">
+                      <button type="button" onClick={() => executeUpdate(s.github)} disabled={saving}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all cursor-pointer">
+                        {saving ? 'Saving…' : 'Save'}
+                      </button>
+                      <button type="button" onClick={() => setEditingGithub(null)}
+                        className="text-xs px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-white/40 hover:text-white/70 transition-all cursor-pointer">
+                        Cancel
+                      </button>
+                    </div>
                   </div>
-                ) : (
-                  <button type="button" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setConfirmRemove(s); }}
-                    className="text-xs px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 hover:bg-red-500/20 transition-all opacity-60 sm:opacity-0 group-hover:opacity-100 cursor-pointer">
-                    Remove
-                  </button>
                 )}
               </div>
             );
@@ -1243,6 +1370,8 @@ interface JoinRequest {
   avatarUrl?: string;
   status: 'pending' | 'approved' | 'rejected';
   createdAt: string;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
 }
 
 function RequestsTab({ onCountChange }: { onCountChange: (count: number) => void }) {
@@ -1326,6 +1455,20 @@ function RequestsTab({ onCountChange }: { onCountChange: (count: number) => void
                         {r.name && r.name !== r.github ? `${r.name} (@${r.github})` : `@${r.github}`}
                       </p>
                       <p className="text-white/25 text-xs">Requested on {new Date(r.createdAt).toLocaleDateString()}</p>
+                      {(r.year || r.campus) && (
+                        <div className="flex flex-wrap gap-1.5 mt-1">
+                          {r.year && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/15 text-purple-400 border border-purple-500/25 font-semibold">
+                              {r.year}
+                            </span>
+                          )}
+                          {r.campus && (
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-400 border border-blue-500/25 font-semibold">
+                              {r.campus}
+                            </span>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
@@ -1365,9 +1508,17 @@ function RequestsTab({ onCountChange }: { onCountChange: (count: number) => void
                   <div key={r.github} className="flex items-center justify-between gap-4 bg-white/[0.015] border border-white/[0.05] rounded-xl px-4 py-2 text-white/50">
                     <div className="flex items-center gap-3">
                       <img src={r.avatarUrl || `https://avatars.githubusercontent.com/${r.github}?s=32`} alt={r.github} className="w-6 h-6 rounded-full opacity-60" />
-                      <div className="text-xs">
-                        <span className="font-medium text-white/70">@{r.github}</span>
-                        {r.name && r.name !== r.github && <span className="text-white/40 ml-1">({r.name})</span>}
+                      <div>
+                        <div className="text-xs">
+                          <span className="font-medium text-white/70">@{r.github}</span>
+                          {r.name && r.name !== r.github && <span className="text-white/40 ml-1">({r.name})</span>}
+                        </div>
+                        {(r.year || r.campus) && (
+                          <div className="flex flex-wrap gap-1 mt-0.5">
+                            {r.year && <span className="text-[8px] px-1 py-0.2 rounded bg-purple-500/10 text-purple-400 font-medium">{r.year}</span>}
+                            {r.campus && <span className="text-[8px] px-1 py-0.2 rounded bg-blue-500/10 text-blue-400 font-medium">{r.campus}</span>}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="flex items-center gap-3 text-xs">

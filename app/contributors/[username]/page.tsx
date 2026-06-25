@@ -12,6 +12,7 @@ import { notFound } from 'next/navigation';
 import { ShareButton } from '../ShareButton';
 import { RefreshButton } from '../RefreshButton';
 import { readProfileCache, writeProfileCache, isProfileFresh } from '@/lib/profile-cache';
+import { getStudentsKV } from '@/lib/kv-students';
 
 export const revalidate = 3600;
 
@@ -308,7 +309,12 @@ export default async function ContributorPage({
   params: Promise<{ username: string }>;
   searchParams: Promise<{ tab?: string; period?: string; from?: string; to?: string }>;
 }) {
-  const [{ username }, { tab: rawTab, period, from, to }] = await Promise.all([params, searchParams]);
+  const [{ username }, { tab: rawTab, period, from, to }, students] = await Promise.all([
+    params,
+    searchParams,
+    getStudentsKV(),
+  ]);
+  const student = students.find((s) => s.github.toLowerCase() === username.toLowerCase());
   const tab: Tab = rawTab === 'issues' ? 'issues' : rawTab === 'merged' ? 'merged' : rawTab === 'open' ? 'open' : 'prs';
 
   let profile = null;
@@ -329,14 +335,14 @@ export default async function ContributorPage({
         getStudentPRs(username),
         getStudentIssues(username),
       ]);
-      if (freshProfile) {
+      if (freshProfile && freshPRs !== null && freshIssues !== null) {
         profile = freshProfile;
         allPRs = freshPRs;
         issues = freshIssues;
         await writeProfileCache(username, freshProfile, freshPRs, freshIssues);
         cachedAt = new Date().toISOString();
       } else if (cached) {
-        // Fallback to stale cache if API limit hit
+        // Fallback to stale cache if API limit hit or empty results due to API error
         profile = cached.profile;
         allPRs = cached.prs;
         issues = cached.issues;
@@ -407,6 +413,16 @@ export default async function ContributorPage({
                 {counts.mergedPRs > 0 && counts.mergedPRs <= 5 && (
                   <span className="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-medium">
                     🌱 New Contributor
+                  </span>
+                )}
+                {student?.year && (
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-purple-400 font-medium">
+                    🎓 {student.year}
+                  </span>
+                )}
+                {student?.campus && (
+                  <span className="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 font-medium">
+                    📍 {student.campus}
                   </span>
                 )}
               </div>

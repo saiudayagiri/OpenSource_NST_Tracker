@@ -90,6 +90,10 @@ export async function POST(request: Request) {
       getStudentIssues(username),
     ]);
 
+    if (prs === null || issues === null) {
+      return Response.json({ error: 'Failed to fetch contributions from GitHub' }, { status: 502 });
+    }
+
     await writeProfileCache(username, profile, prs, issues);
 
     // Regenerate the global summary caches locally so the leaderboard is immediately updated
@@ -131,10 +135,10 @@ export async function POST(request: Request) {
     });
   }
 
-  // Fetch fresh summaries from GitHub
+  // Fetch fresh summaries from cached profile data (zero live GitHub search queries)
   const flaggedPRIds = await getFlaggedPRIdSet();
   const dateQuery = buildDateQuery(period);
-  const summaries = await getAllStudentSummaries(dateQuery, flaggedPRIds, true);
+  const summaries = await getAllStudentSummaries(dateQuery, flaggedPRIds, false);
   await writeSummaryCache(summaries, period);
 
   // Tell Next.js to re-render the pages

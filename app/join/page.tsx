@@ -19,6 +19,8 @@ export default function JoinRequestPage() {
   const [statusMessage, setStatusMessage] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [year, setYear] = useState<'1st year' | '2nd year' | '3rd year' | '4th year' | ''>('');
+  const [campus, setCampus] = useState<'Rishihood' | 'ADYPU' | 'SVYASA' | ''>('');
 
   // Debounced profile verification and status check as the user types
   useEffect(() => {
@@ -74,13 +76,19 @@ export default function JoinRequestPage() {
       const res = await fetch('/api/join-requests', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ github: github.trim() }),
+        body: JSON.stringify({
+          github: github.trim(),
+          year: year || undefined,
+          campus: campus || undefined,
+        }),
       });
 
       const data = await res.json();
       if (res.ok) {
         setSuccess(`Request submitted successfully! The admin queue will review @${github.trim()} soon.`);
         setGithub('');
+        setYear('');
+        setCampus('');
         setVerifiedProfile(null);
         setStatus('idle');
       } else {
@@ -178,6 +186,57 @@ export default function JoinRequestPage() {
                   {verifiedProfile.bio && (
                     <p className="text-white/40 text-xs mt-1 leading-normal line-clamp-2">{verifiedProfile.bio}</p>
                   )}
+                </div>
+              </div>
+            )}
+
+            {/* Year & Campus Selects */}
+            {status === 'eligible' && (
+              <div className="grid grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                <div className="space-y-2">
+                  <label htmlFor="year-select" className="block text-xs font-semibold text-white/45 uppercase tracking-wider">
+                    Year
+                  </label>
+                  <select
+                    id="year-select"
+                    value={year}
+                    onChange={(e) => setYear(e.target.value as any)}
+                    className="w-full bg-[#0a0e1a]/80 border border-white/[0.09] rounded-2xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-purple-500/40 transition-all cursor-pointer appearance-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 16px center',
+                      backgroundSize: '16px',
+                    }}
+                  >
+                    <option value="" className="bg-[#0f172a] text-white">Select Year</option>
+                    <option value="1st year" className="bg-[#0f172a] text-white">1st Year</option>
+                    <option value="2nd year" className="bg-[#0f172a] text-white">2nd Year</option>
+                    <option value="3rd year" className="bg-[#0f172a] text-white">3rd Year</option>
+                    <option value="4th year" className="bg-[#0f172a] text-white">4th Year</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="campus-select" className="block text-xs font-semibold text-white/45 uppercase tracking-wider">
+                    Campus
+                  </label>
+                  <select
+                    id="campus-select"
+                    value={campus}
+                    onChange={(e) => setCampus(e.target.value as any)}
+                    className="w-full bg-[#0a0e1a]/80 border border-white/[0.09] rounded-2xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-purple-500/40 transition-all cursor-pointer appearance-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e")`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'right 16px center',
+                      backgroundSize: '16px',
+                    }}
+                  >
+                    <option value="" className="bg-[#0f172a] text-white">Select Campus</option>
+                    <option value="Rishihood" className="bg-[#0f172a] text-white">Rishihood</option>
+                    <option value="ADYPU" className="bg-[#0f172a] text-white">ADYPU</option>
+                    <option value="SVYASA" className="bg-[#0f172a] text-white">SVYASA</option>
+                  </select>
                 </div>
               </div>
             )}

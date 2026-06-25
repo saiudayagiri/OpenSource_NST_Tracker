@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:52:07.541Z",
+    "cachedAt": "2026-06-25T13:29:06.679Z",
     "profile": {
       "login": "kartikeyg0104",
       "id": 180191571,
@@ -29,7 +29,7 @@
       "hireable": null,
       "bio": "Engineering student | Open-source contributor | Building intelligent systems\r\n\r\nActively contributing to open-source and exploring system design, backend engine",
       "twitter_username": null,
-      "public_repos": 98,
+      "public_repos": 99,
       "public_gists": 0,
       "followers": 2,
       "following": 6,
@@ -11874,5 +11874,5 @@
       }
     ]
   },
-  "expiresAt": 1784973127544
+  "expiresAt": 1784986146684
 }

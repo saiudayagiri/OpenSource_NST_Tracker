@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:33:50.666Z",
+    "cachedAt": "2026-06-25T13:25:21.807Z",
     "profile": {
       "login": "krishajogiya",
       "avatar_url": "https://github.com/krishajogiya.png",
@@ -14,10 +14,10 @@
       "location": null,
       "blog": null,
       "twitter_username": null,
-      "created_at": "2026-06-23T17:42:04.213Z"
+      "created_at": "2026-06-25T13:25:01.320Z"
     },
     "prs": [],
     "issues": []
   },
-  "expiresAt": 1784972030667
+  "expiresAt": 1784985921807
 }

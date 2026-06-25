@@ -56,14 +56,29 @@ export async function getGitHubHeaders(): Promise<HeadersInit> {
 async function githubSearch<T>(
   q: string,
   page = 1,
-  perPage = 100
+  perPage = 100,
+  retryWithSystemToken = true
 ): Promise<{ total_count: number; items: T[] } | null> {
-  const headers = await getGitHubHeaders();
-  const res = await fetch(
+  let headers = await getGitHubHeaders();
+  let res = await fetch(
     `https://api.github.com/search/issues?q=${encodeURIComponent(q)}&sort=created&order=desc&per_page=${perPage}&page=${page}`,
     { headers, next: { revalidate: 3600 } }
   );
   if (!res.ok) {
+    if (res.status === 401 && retryWithSystemToken && GITHUB_TOKEN) {
+      console.warn('OAuth token in cookie was unauthorized. Retrying with system GITHUB_TOKEN...');
+      headers = {
+        Accept: 'application/vnd.github.v3+json',
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+      };
+      res = await fetch(
+        `https://api.github.com/search/issues?q=${encodeURIComponent(q)}&sort=created&order=desc&per_page=${perPage}&page=${page}`,
+        { headers, next: { revalidate: 3600 } }
+      );
+      if (res.ok) {
+        return res.json();
+      }
+    }
     if (res.status === 403 || res.status === 429) {
       throw new GitHubRateLimitError();
     }
@@ -140,6 +155,8 @@ export interface GitHubUser {
 
 export interface Student {
   github: string;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
 }
 
 export interface StudentSummary {
@@ -151,17 +168,31 @@ export interface StudentSummary {
   /** mergedPRs minus any flagged merged PRs — used for ranking */
   scoreMergedPRs: number;
   issuesCount: number;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
 }
 
 // getStudents() has been replaced with getStudentsKV() from './kv-students'
 
-export async function getStudentProfile(username: string): Promise<GitHubUser | null> {
-  const headers = await getGitHubHeaders();
-  const res = await fetch(`https://api.github.com/users/${username}`, {
+export async function getStudentProfile(username: string, retryWithSystemToken = true): Promise<GitHubUser | null> {
+  let headers = await getGitHubHeaders();
+  let res = await fetch(`https://api.github.com/users/${username}`, {
     headers,
     next: { revalidate: 3600 },
   });
   if (!res.ok) {
+    if (res.status === 401 && retryWithSystemToken && GITHUB_TOKEN) {
+      console.warn('OAuth token in cookie was unauthorized. Retrying with system GITHUB_TOKEN...');
+      headers = {
+        Accept: 'application/vnd.github.v3+json',
+        Authorization: `Bearer ${GITHUB_TOKEN}`,
+      };
+      res = await fetch(`https://api.github.com/users/${username}`, {
+        headers,
+        next: { revalidate: 3600 },
+      });
+      if (res.ok) return res.json();
+    }
     if (res.status === 403 || res.status === 429) {
       throw new GitHubRateLimitError();
     }
@@ -193,7 +224,7 @@ function searchPRs(username: string, extra = '', page = 1, perPage = 100) {
   );
 }
 
-export async function getStudentIssues(username: string): Promise<StudentIssue[]> {
+export async function getStudentIssues(username: string): Promise<StudentIssue[] | null> {
   const all: StudentIssue[] = [];
   let page = 1;
   const maxPages = GITHUB_TOKEN ? 10 : 3;
@@ -202,7 +233,7 @@ export async function getStudentIssues(username: string): Promise<StudentIssue[]
       `is:issue author:${username} -user:${username}`,
       page
     );
-    if (!data) break;
+    if (!data) return null;
     all.push(...data.items);
     if (all.length >= data.total_count || data.items.length < 100) break;
     page++;
@@ -228,14 +259,14 @@ export async function getStudentReviews(username: string): Promise<StudentPR[]> 
 }
 
 
-export async function getStudentPRs(username: string): Promise<StudentPR[]> {
+export async function getStudentPRs(username: string): Promise<StudentPR[] | null> {
   const allPRs: StudentPR[] = [];
   let page = 1;
   const maxPages = GITHUB_TOKEN ? 10 : 3;
 
   while (page <= maxPages) {
     const data = await searchPRs(username, '', page);
-    if (!data) break;
+    if (!data) return null;
     allPRs.push(...data.items);
     if (allPRs.length >= data.total_count || data.items.length < 100) break;
     page++;
@@ -314,7 +345,10 @@ export async function getStudentSummary(
   // If we have profile cache, use it immediately to avoid hitting the rate limit
   if (cached) {
     try {
-      return getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+      const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+      summary.year = student.year;
+      summary.campus = student.campus;
+      return summary;
     } catch (err) {
       console.error(`Error generating summary from cache for ${student.github}:`, err);
     }
@@ -333,7 +367,10 @@ export async function getStudentSummary(
     if (!profile) {
       if (cached) {
         console.warn(`Profile fetch failed but fallback cache exists for ${student.github}`);
-        return getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        summary.year = student.year;
+        summary.campus = student.campus;
+        return summary;
       }
       return null;
     }
@@ -360,10 +397,10 @@ export async function getStudentSummary(
     }).length;
     const flaggedMerged = Math.round(flaggedMergedInSample * scale);
 
-    if (!dateQuery && profile) {
+    if (!dateQuery && profile && data !== null && issueData !== null) {
       try {
-        const prsList = data ? data.items : [];
-        const issuesList = issueData ? issueData.items : [];
+        const prsList = data.items;
+        const issuesList = issueData.items;
         writeProfileCache(student.github, profile, prsList, issuesList).catch((err) =>
           console.error(`Failed to write profile cache in summary:`, err)
         );
@@ -380,13 +417,18 @@ export async function getStudentSummary(
       closedPRs: Math.round(closedInSample * scale),
       scoreMergedPRs: Math.max(0, mergedPRs - flaggedMerged),
       issuesCount: issueData ? issueData.total_count : 0,
+      year: student.year,
+      campus: student.campus,
     };
   } catch (error) {
     console.warn(`Error or rate limit hit during live summary fetch for ${student.github}:`, error);
     if (cached) {
       console.info(`Falling back to cached profile data for ${student.github}`);
       try {
-        return getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        summary.year = student.year;
+        summary.campus = student.campus;
+        return summary;
       } catch (err) {
         console.error(`Error generating summary from stale cache for ${student.github}:`, err);
       }
@@ -422,6 +464,8 @@ export async function getAllStudentSummaries(
     for (const { student, cached } of cachedResults) {
       if (cached) {
         const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+        summary.year = student.year;
+        summary.campus = student.campus;
         summaries.push(summary);
       } else {
         uncachedStudents.push(student);
@@ -441,6 +485,7 @@ export async function getAllStudentSummaries(
   const allPRs: StudentPR[] = [];
   const allIssues: StudentIssue[] = [];
   let rateLimitHit = false;
+  const successfulFetches = new Map<string, boolean>();
 
   for (let i = 0; i < usernames.length; i += batchSize) {
     // Cool down after a rate-limit detection (search limit resets every 60s)
@@ -451,7 +496,7 @@ export async function getAllStudentSummaries(
     }
 
     const batch = usernames.slice(i, i + batchSize);
-    const authorQuery = `(${batch.map((u) => `author:${u}`).join(' OR ')})`;
+    const authorQuery = batch.map((u) => `author:${u}`).join(' ');
     const prQuery = `is:pr ${authorQuery}${dateQuery ? ' ' + dateQuery : ''}`;
     const issueQuery = `is:issue ${authorQuery}${dateQuery ? ' ' + dateQuery : ''}`;
 
@@ -460,20 +505,30 @@ export async function getAllStudentSummaries(
       githubSearchAll<StudentIssue>(issueQuery),
     ]);
 
+    let batchSuccess = false;
     let batchRateLimited = false;
 
-    if (results[0].status === 'fulfilled' && results[0].value?.items) {
-      allPRs.push(...results[0].value.items);
-    } else if (results[0].status === 'rejected') {
-      if (results[0].reason instanceof GitHubRateLimitError) batchRateLimited = true;
-      else console.error(`PR batch ${i} error:`, results[0].reason);
-    }
+    const prFulfilled = results[0].status === 'fulfilled' && results[0].value !== null;
+    const issueFulfilled = results[1].status === 'fulfilled' && results[1].value !== null;
 
-    if (results[1].status === 'fulfilled' && results[1].value?.items) {
-      allIssues.push(...results[1].value.items);
-    } else if (results[1].status === 'rejected') {
-      if (results[1].reason instanceof GitHubRateLimitError) batchRateLimited = true;
-      else console.error(`Issue batch ${i} error:`, results[1].reason);
+    if (prFulfilled && issueFulfilled) {
+      allPRs.push(...(results[0] as PromiseFulfilledResult<any>).value.items);
+      allIssues.push(...(results[1] as PromiseFulfilledResult<any>).value.items);
+      batchSuccess = true;
+    } else {
+      if (results[0].status === 'rejected' && results[0].reason instanceof GitHubRateLimitError) batchRateLimited = true;
+      else if (results[0].status === 'fulfilled' && results[0].value === null) {
+        console.warn(`PR batch ${i} returned null`);
+      } else if (results[0].status === 'rejected') {
+        console.error(`PR batch ${i} error:`, results[0].reason);
+      }
+
+      if (results[1].status === 'rejected' && results[1].reason instanceof GitHubRateLimitError) batchRateLimited = true;
+      else if (results[1].status === 'fulfilled' && results[1].value === null) {
+        console.warn(`Issue batch ${i} returned null`);
+      } else if (results[1].status === 'rejected') {
+        console.error(`Issue batch ${i} error:`, results[1].reason);
+      }
     }
 
     // On rate limit: wait for reset and retry the batch once
@@ -486,15 +541,23 @@ export async function getAllStudentSummaries(
         githubSearchAll<StudentIssue>(issueQuery),
       ]);
 
-      if (retry[0].status === 'fulfilled' && retry[0].value?.items) {
-        allPRs.push(...retry[0].value.items);
-      } else if (retry[0].status === 'rejected' && retry[0].reason instanceof GitHubRateLimitError) {
-        rateLimitHit = true; // Triggers cooldown before next batch
-      }
+      const retryPrFulfilled = retry[0].status === 'fulfilled' && retry[0].value !== null;
+      const retryIssueFulfilled = retry[1].status === 'fulfilled' && retry[1].value !== null;
 
-      if (retry[1].status === 'fulfilled' && retry[1].value?.items) {
-        allIssues.push(...retry[1].value.items);
+      if (retryPrFulfilled && retryIssueFulfilled) {
+        allPRs.push(...(retry[0] as PromiseFulfilledResult<any>).value.items);
+        allIssues.push(...(retry[1] as PromiseFulfilledResult<any>).value.items);
+        batchSuccess = true;
+      } else {
+        if (retry[0].status === 'rejected' && retry[0].reason instanceof GitHubRateLimitError) {
+          rateLimitHit = true; // Triggers cooldown before next batch
+        }
       }
+    }
+
+    // Record success state for this batch of usernames
+    for (const u of batch) {
+      successfulFetches.set(u.toLowerCase(), batchSuccess);
     }
 
     if (i + batchSize < usernames.length && !rateLimitHit) {
@@ -527,14 +590,23 @@ export async function getAllStudentSummaries(
   // ── Build summaries for fetched students ───────────────────────────
   for (const student of studentsToFetch) {
     const lowerName = student.github.toLowerCase();
+    const isSuccess = successfulFetches.get(lowerName) ?? false;
+    const cached = await readProfileCache(student.github);
+
+    if (!isSuccess && cached) {
+      // Fallback to stale cache if batch query failed
+      const summary = getSummaryFromCache(cached, dateQuery, flaggedPRIds);
+      summary.year = student.year;
+      summary.campus = student.campus;
+      summaries.push(summary);
+      continue;
+    }
+
     const prs = studentPRMap.get(lowerName) || [];
     const issues = studentIssueMap.get(lowerName) || [];
 
-
-
     // Resolve profile (cache → live → placeholder)
     let profile: GitHubUser | null = null;
-    const cached = await readProfileCache(student.github);
     if (cached) {
       profile = cached.profile;
     } else {
@@ -563,9 +635,9 @@ export async function getAllStudentSummaries(
       };
     }
 
-    // Persist to profile cache when fetching ALL-TIME data (no date filter)
+    // Persist to profile cache when fetching ALL-TIME data (no date filter) AND batch fetch succeeded
     // so future custom date queries can compute locally from cache
-    if (!dateQuery) {
+    if (!dateQuery && isSuccess) {
       writeProfileCache(student.github, profile, prs, issues).catch((err) =>
         console.error(`Failed to write profile cache for ${student.github}:`, err)
       );
@@ -591,6 +663,8 @@ export async function getAllStudentSummaries(
       closedPRs,
       scoreMergedPRs: Math.max(0, mergedPRs - flaggedMerged),
       issuesCount: issues.length,
+      year: student.year,
+      campus: student.campus,
     });
   }
 
@@ -629,6 +703,9 @@ export async function refreshStudentCache(username: string): Promise<void> {
   }
   const prs = await getStudentPRs(username);
   const issues = await getStudentIssues(username);
+  if (prs === null || issues === null) {
+    throw new Error(`Failed to fetch contributions for user: ${username}`);
+  }
   await writeProfileCache(username, profile, prs, issues);
 }
 

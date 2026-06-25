@@ -13,6 +13,8 @@ const KV_KEY = 'students_list';
 
 export interface Student {
   github: string;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
 }
 
 async function seedFromFile(): Promise<Student[]> {
@@ -24,7 +26,11 @@ async function seedFromFile(): Promise<Student[]> {
       .map((s: unknown) => {
         if (typeof s === 'string') return { github: s };
         if (typeof s === 'object' && s !== null && typeof (s as Record<string,unknown>).github === 'string')
-          return { github: (s as Record<string,string>).github };
+          return {
+            github: (s as Record<string,string>).github,
+            year: (s as any).year,
+            campus: (s as any).campus,
+          };
         return null;
       })
       .filter((s): s is Student => s !== null);
@@ -41,13 +47,32 @@ export async function getStudentsKV(): Promise<Student[]> {
   return seedFromFile();
 }
 
-export async function addStudent(github: string): Promise<{ ok: boolean; message?: string }> {
+export async function addStudent(
+  github: string,
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year',
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA'
+): Promise<{ ok: boolean; message?: string }> {
   const list = await getStudentsKV();
   const lower = github.toLowerCase().trim();
   if (!lower) return { ok: false, message: 'GitHub username cannot be empty' };
   if (list.some((s) => s.github.toLowerCase() === lower))
     return { ok: false, message: `${github} is already in the list` };
-  list.push({ github: github.trim() });
+  list.push({ github: github.trim(), year, campus });
+  await kvSet(KV_KEY, list);
+  return { ok: true };
+}
+
+export async function updateStudentDetails(
+  github: string,
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year',
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA'
+): Promise<{ ok: boolean; message?: string }> {
+  const list = await getStudentsKV();
+  const lower = github.toLowerCase().trim();
+  const index = list.findIndex((s) => s.github.toLowerCase() === lower);
+  if (index === -1) return { ok: false, message: 'Student not found' };
+  list[index].year = year;
+  list[index].campus = campus;
   await kvSet(KV_KEY, list);
   return { ok: true };
 }

@@ -63,7 +63,11 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => ({}));
-    const { github } = body as { github?: string };
+    const { github, year, campus } = body as {
+      github?: string;
+      year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+      campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
+    };
 
     if (!github?.trim()) {
       return Response.json({ error: 'GitHub username is required.' }, { status: 400 });
@@ -93,7 +97,9 @@ export async function POST(request: Request) {
     const result = await addJoinRequest(
       profile.login,
       profile.name ?? profile.login,
-      profile.avatar_url
+      profile.avatar_url,
+      year,
+      campus
     );
 
     if (!result.ok) {

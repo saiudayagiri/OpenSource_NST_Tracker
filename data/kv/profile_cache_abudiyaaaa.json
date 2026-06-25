@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:48:28.792Z",
+    "cachedAt": "2026-06-25T13:26:23.939Z",
     "profile": {
       "login": "ABUDIYAAAA",
       "id": 91617550,
@@ -34,7 +34,7 @@
       "followers": 7,
       "following": 2,
       "created_at": "2021-09-29T14:37:21Z",
-      "updated_at": "2026-05-24T15:02:50Z"
+      "updated_at": "2026-06-24T14:46:56Z"
     },
     "prs": [
       {
@@ -3989,5 +3989,5 @@
       }
     ]
   },
-  "expiresAt": 1784972908793
+  "expiresAt": 1784985983940
 }

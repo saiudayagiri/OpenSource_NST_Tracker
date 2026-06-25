@@ -36,10 +36,10 @@ export default async function AchieverPage({ params }: { params: Promise<{ usern
         getStudentProfile(username),
         getStudentPRs(username),
       ]);
-      if (freshProfile) {
+      const freshIssues = await getStudentIssues(username);
+      if (freshProfile && freshPRs !== null && freshIssues !== null) {
         profile = freshProfile;
         prs = freshPRs;
-        const freshIssues = await getStudentIssues(username);
         await writeProfileCache(username, freshProfile, freshPRs, freshIssues);
       } else if (cached) {
         profile = cached.profile;

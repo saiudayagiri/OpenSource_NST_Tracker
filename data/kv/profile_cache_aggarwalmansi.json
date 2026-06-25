@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:49:06.164Z",
+    "cachedAt": "2026-06-25T13:27:01.939Z",
     "profile": {
       "login": "Aggarwalmansi",
       "id": 189028773,
@@ -29,7 +29,7 @@
       "hireable": null,
       "bio": null,
       "twitter_username": null,
-      "public_repos": 59,
+      "public_repos": 60,
       "public_gists": 0,
       "followers": 0,
       "following": 1,
@@ -2423,5 +2423,5 @@
     ],
     "issues": []
   },
-  "expiresAt": 1784972946165
+  "expiresAt": 1784986021939
 }

@@ -8,6 +8,8 @@ export interface JoinRequest {
   avatarUrl?: string;
   status: 'pending' | 'approved' | 'rejected';
   createdAt: string;
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year';
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA';
 }
 
 export async function getJoinRequestsKV(): Promise<JoinRequest[]> {
@@ -18,7 +20,9 @@ export async function getJoinRequestsKV(): Promise<JoinRequest[]> {
 export async function addJoinRequest(
   github: string,
   name?: string,
-  avatarUrl?: string
+  avatarUrl?: string,
+  year?: '1st year' | '2nd year' | '3rd year' | '4th year',
+  campus?: 'Rishihood' | 'ADYPU' | 'SVYASA'
 ): Promise<{ ok: boolean; message?: string }> {
   const list = await getJoinRequestsKV();
   const lower = github.toLowerCase().trim();
@@ -34,6 +38,8 @@ export async function addJoinRequest(
     avatarUrl: avatarUrl || undefined,
     status: 'pending',
     createdAt: new Date().toISOString(),
+    year,
+    campus,
   });
 
   await kvSet(KV_KEY, list);

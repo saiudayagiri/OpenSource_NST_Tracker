@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T09:52:58.316Z",
+    "cachedAt": "2026-06-25T13:29:45.666Z",
     "profile": {
       "login": "lakshay122007",
       "id": 210226282,
@@ -34,9 +34,221 @@
       "followers": 17,
       "following": 13,
       "created_at": "2025-05-04T08:24:32Z",
-      "updated_at": "2026-06-23T03:47:39Z"
+      "updated_at": "2026-06-24T03:40:29Z"
     },
     "prs": [
+      {
+        "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194",
+        "repository_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot",
+        "labels_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194/comments",
+        "events_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194/events",
+        "html_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194",
+        "id": 4743484138,
+        "node_id": "PR_kwDORnmr5s7qic39",
+        "number": 194,
+        "title": "integrate false positive classifier into live scan pipeline",
+        "user": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 10433168226,
+            "node_id": "LA_kwDORnmr5s8AAAACbd2DYg",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/bug",
+            "name": "bug",
+            "color": "d73a4a",
+            "default": true,
+            "description": "Something isn't working"
+          },
+          {
+            "id": 11096194161,
+            "node_id": "LA_kwDORnmr5s8AAAAClWJ8cQ",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/ml",
+            "name": "ml",
+            "color": "2e9ce1",
+            "default": false,
+            "description": "ML related issues"
+          },
+          {
+            "id": 11096198259,
+            "node_id": "LA_kwDORnmr5s8AAAAClWKMcw",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/backend",
+            "name": "backend",
+            "color": "429e97",
+            "default": false,
+            "description": "Backend issues"
+          },
+          {
+            "id": 11096199215,
+            "node_id": "LA_kwDORnmr5s8AAAAClWKQLw",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/frontend",
+            "name": "frontend",
+            "color": "91a201",
+            "default": false,
+            "description": "Frontend issues"
+          },
+          {
+            "id": 11096232890,
+            "node_id": "LA_kwDORnmr5s8AAAAClWMTug",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/SSoC26",
+            "name": "SSoC26",
+            "color": "5c11ed",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11324193992,
+            "node_id": "LA_kwDORnmr5s8AAAACovl8yA",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/under-review",
+            "name": "under-review",
+            "color": "a4a58f",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11326208057,
+            "node_id": "LA_kwDORnmr5s8AAAACoxg4OQ",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/changes-required",
+            "name": "changes-required",
+            "color": "8d6437",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11326542772,
+            "node_id": "LA_kwDORnmr5s8AAAACox1TtA",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/checks-passed",
+            "name": "checks-passed",
+            "color": "9a0e54",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11332076963,
+            "node_id": "LA_kwDORnmr5s8AAAACo3HFow",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/mentor-review",
+            "name": "mentor-review",
+            "color": "117b8f",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11332079974,
+            "node_id": "LA_kwDORnmr5s8AAAACo3HRZg",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/Template-passed",
+            "name": "Template-passed",
+            "color": "262170",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11332595178,
+            "node_id": "LA_kwDORnmr5s8AAAACo3mt6g",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/assigned",
+            "name": "assigned",
+            "color": "4fefa7",
+            "default": false,
+            "description": ""
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignees": [
+          {
+            "login": "lakshay122007",
+            "id": 210226282,
+            "node_id": "U_kgDODIfMag",
+            "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lakshay122007",
+            "html_url": "https://github.com/lakshay122007",
+            "followers_url": "https://api.github.com/users/lakshay122007/followers",
+            "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+            "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+            "repos_url": "https://api.github.com/users/lakshay122007/repos",
+            "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          }
+        ],
+        "milestone": null,
+        "comments": 9,
+        "created_at": "2026-06-25T11:46:29Z",
+        "updated_at": "2026-06-25T12:32:44Z",
+        "closed_at": null,
+        "assignee": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "draft": false,
+        "pull_request": {
+          "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/pulls/194",
+          "html_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194",
+          "diff_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194.diff",
+          "patch_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194.patch",
+          "merged_at": null
+        },
+        "body": "> **Before opening:** make sure there is an issue tracking this work, and link it below. PRs without a linked issue may be closed without review.\r\n\r\n## Linked issue\r\n\r\nCloses #167\r\n\r\n## What this PR does\r\n\r\nThis PR fixes a critical `TypeError` during the live ML inference pipeline. Upstream scanners were occasionally returning `None` for the `ml_score`, which caused the false positive penalty calculation to crash (`None * 0.2`). This adds safe type coalescence and adjusts the probability threshold to properly downrank findings based on our current dataset size.\r\n\r\n## Type of change\r\n\r\n- [x] Bug fix\r\n- [ ] New feature\r\n- [ ] ML model / training pipeline\r\n- [ ] Refactor (no behaviour change)\r\n- [ ] Documentation\r\n- [ ] Tests only\r\n\r\n## ML tier (if applicable)\r\n\r\n- [x] Tier 1 — Triage\r\n- [ ] Tier 2 — Predictive\r\n- [ ] Tier 3 — Autonomous\r\n- [ ] Not ML-related\r\n\r\n## Stack affected\r\n\r\n- [x] Backend\r\n- [ ] Frontend\r\n- [ ] Both\r\n\r\n---\r\n\r\n## Changes\r\n\r\n### Backend\r\n\r\n- Added fallback logic in `app/ml/fp_predictor.py` to safely cast `None` to `1.0` before multiplication.\r\n- Adjusted the FP penalty threshold boundary to `0.5` to accommodate smaller training sets.\r\n- Patched test suite mocks in `tests/test_deduplicator.py` to prevent false positive pipeline crashes during unrelated tests.\r\n\r\n### Frontend\r\n\r\n- N/A\r\n\r\n### New dependencies\r\n\r\n- N/A\r\n\r\n### Database / schema changes\r\n\r\n- N/A\r\n\r\n---\r\n\r\n## Testing\r\n\r\n**How did you test this?**\r\n\r\nTested locally by triggering a fresh scan from the UI. Monitored the FastAPI logs to ensure the inference engine correctly calculated probabilities and applied the `0.2` penalty to the `ml_score` without throwing exceptions. Validated that the UI successfully rendered the `20%` severity badges for false positives. Passed the entire `pytest` suite and `ruff` formatting checks.\r\n\r\n**Checklist**\r\n\r\n- [x] Tested locally end-to-end (upload ZIP or GitHub URL → scan → findings returned correctly)\r\n- [x] New ML model falls back gracefully when model file is absent\r\n- [x] No new `console.error` or unhandled Python exceptions introduced\r\n- [x] Added or updated tests where applicable\r\n- [ ] `requirements.txt` / `package.json` updated if new dependencies added\r\n- [x] New model files (`.pkl`, `.pt`, etc.) are gitignored, not committed\r\n\r\n---\r\n\r\n## Anything reviewers should focus on\r\n\r\nPlease review the `NoneType` fallback logic in the `fp_predictor.py` iteration loop. \r\n\r\n*(Note: There is an existing frontend bug where the Confidence table column still says \"100%\" despite the backend correctly sending `0.2`—which renders correctly inside the severity badge. That frontend UI fix is out of scope for this strictly backend PR).*\r\n\r\n## Screenshots (if UI changed)\r\n\r\nN/A",
+        "reactions": {
+          "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "score": 1
+      },
       {
         "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/930",
         "repository_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse",
@@ -98,7 +310,7 @@
             "description": "30 Points"
           }
         ],
-        "state": "open",
+        "state": "closed",
         "locked": false,
         "assignees": [
           {
@@ -126,8 +338,8 @@
         "milestone": null,
         "comments": 5,
         "created_at": "2026-06-25T09:21:23Z",
-        "updated_at": "2026-06-25T09:27:40Z",
-        "closed_at": null,
+        "updated_at": "2026-06-25T10:12:41Z",
+        "closed_at": "2026-06-25T10:12:41Z",
         "assignee": {
           "login": "lakshay122007",
           "id": 210226282,
@@ -157,7 +369,7 @@
           "html_url": "https://github.com/Eshajha19/Algo-Infinity-Verse/pull/930",
           "diff_url": "https://github.com/Eshajha19/Algo-Infinity-Verse/pull/930.diff",
           "patch_url": "https://github.com/Eshajha19/Algo-Infinity-Verse/pull/930.patch",
-          "merged_at": null
+          "merged_at": "2026-06-25T10:12:41Z"
         },
         "body": "## Root Cause\r\nThe frontend (`dsa-battle-mode.js`) called `/api/battles` for all battle\r\noperations, but no such API route existed in `api/`. The server returned\r\nits default HTML 404 error page. The frontend called `res.json()` on that\r\nHTML response, which threw:\r\n\r\n> Unexpected token 'T', \"The page c...\" is not valid JSON\r\n\r\n`battleService.js` existed in `pages/Dsa Battle/` but was never wired\r\nto any HTTP route.\r\n\r\n## Fix\r\nCreated `api/battles.js` as a Vercel serverless function that:\r\n- Handles all 5 routes the frontend already calls\r\n- Uses identical auth pattern to `api/session.js` (cookie + HMAC JWT)\r\n- Uses identical Firebase init pattern to other `api/` files\r\n- Replicates the transaction logic from `battleService.js` directly\r\n\r\n## Routes added\r\n| Method | Path | Action |\r\n|--------|------|--------|\r\n| POST | `/api/battles` | Create battle |\r\n| GET | `/api/battles/history` | Battle history |\r\n| GET | `/api/battles/:id` | Poll battle state |\r\n| POST | `/api/battles/:id/join` | Join battle |\r\n| POST | `/api/battles/:id/submit` | Submit solution |\r\n\r\n## Testing\r\n1. Go to DSA Battle Mode → Battle Lobby\r\n2. Select difficulty, enter opponent email, click Create Battle\r\n3. Battle ID returned, no JSON parse error\r\n4. Opponent can join via battle ID\r\n5. Both players can submit solution\r\n\r\n## Related issue\r\nFixes #905\n\n<!-- This is an auto-generated comment: release notes by coderabbit.ai -->\n\n## Summary by CodeRabbit\n\n* **New Features**\n  * Added a new battle feature with endpoints to create, join, view, submit, and review battle history.\n  * Battle matches now support opponent lookup by email, difficulty-based problem selection, and XP rewards for completed wins.\n  * Requests to battle-related API paths are now routed correctly for cleaner access.\n\n* **Bug Fixes**\n  * Improved session handling with stricter authentication checks and automatic expiry handling for active battles.\n\n<!-- end of auto-generated comment: release notes by coderabbit.ai -->",
         "reactions": {
@@ -24528,5 +24740,5 @@
       }
     ]
   },
-  "expiresAt": 1784973178320
+  "expiresAt": 1784986185668
 }

@@ -29,7 +29,12 @@ export async function POST(request: Request) {
     }
 
     if (action === 'approve') {
-      const addRes = await addStudent(github);
+      const requests = await getJoinRequestsKV();
+      const reqDetail = requests.find(
+        (r) => r.github.toLowerCase() === github.toLowerCase() && r.status === 'pending'
+      );
+
+      const addRes = await addStudent(github, reqDetail?.year, reqDetail?.campus);
       if (!addRes.ok) {
         // Even if already in the list, we still mark request as approved to clean up queue
         if (addRes.message?.includes('already')) {

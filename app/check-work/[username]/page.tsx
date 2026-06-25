@@ -455,6 +455,9 @@ export default async function CheckWorkUserPage({
         getStudentPRs(username),
         getStudentIssues(username),
       ]);
+      if (prsRes === null || issuesRes === null) {
+        throw new Error('API_ERROR');
+      }
       allPRs = prsRes;
       issues = issuesRes;
     }
@@ -489,10 +492,10 @@ export default async function CheckWorkUserPage({
               Sign In with GitHub
             </Link>
             <Link
-              href="/check-work"
+              href="/"
               className="text-white/40 hover:text-white text-xs font-semibold py-2 transition-colors"
             >
-              Back to Search
+              Back to Home
             </Link>
           </div>
         </div>
@@ -511,10 +514,10 @@ export default async function CheckWorkUserPage({
             We couldn&apos;t find GitHub username <span className="text-purple-400 font-semibold">@{username}</span>. Make sure the username is spelled correctly.
           </p>
           <Link
-            href="/check-work"
+            href="/"
             className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-xl transition-all text-xs font-semibold"
           >
-            Back to Search
+            Back to Home
           </Link>
         </div>
       </main>
@@ -539,13 +542,13 @@ export default async function CheckWorkUserPage({
       {/* Navigation back */}
       <div className="max-w-4xl mx-auto px-4 pt-6">
         <Link 
-          href="/check-work" 
+          href="/" 
           className="inline-flex items-center gap-2 text-white/30 hover:text-white/70 transition-colors text-sm"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Search
+          Back to Home
         </Link>
       </div>
 
