@@ -29,7 +29,7 @@
 
 ## 1. Project Overview
 
-The **OpenSource NST Tracker** is a web platform that tracks and ranks open-source contributions made by students at NST (Network of Schools & Talent). It:
+The **OpenSource NST Tracker** is a web platform that tracks and ranks open-source contributions made by students at NST . It:
 
 - **Tracks** Pull Requests and Issues created by registered students across all of GitHub
 - **Ranks** students on a leaderboard by their "clean" merged PRs (excluding flagged/spam ones)
