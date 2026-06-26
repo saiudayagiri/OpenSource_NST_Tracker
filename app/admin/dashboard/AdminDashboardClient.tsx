@@ -266,41 +266,44 @@ function QueueTab({ students, reviewedIds, flaggedMap, onFlag, onApprove, onUnap
   const loadQueue = useCallback(async () => {
     setLoading(true);
     setError('');
-    setProgress({ done: 0, total: students.length });
-    const all: PRWithMeta[] = [];
+    setProgress({ done: 0, total: 1 });
 
-    for (let i = 0; i < students.length; i++) {
-      const username = students[i];
-      try {
-        const raw = await fetchPRsForUser(username);
-        const mapped: PRWithMeta[] = raw.map((pr) => {
-          const repo = repoFromUrl(pr.repository_url);
-          const prKey = `${repo}#${pr.number}`;
-          return {
-            ...pr,
-            prKey,
-            repo,
-            isMerged: !!pr.pull_request?.merged_at,
-            flagged: flaggedMap.get(prKey),
-            approved: reviewedIds.has(prKey) && !flaggedMap.has(prKey),
-          };
-        });
-        all.push(...mapped);
-      } catch {
-        // skip user on error
+    try {
+      const res = await fetch('/api/admin/queue');
+      if (!res.ok) {
+        throw new Error(`Failed to load queue: ${res.status}`);
       }
-      setProgress({ done: i + 1, total: students.length });
+      const data = await res.json();
+      const rawPRs: RawPR[] = data.prs ?? [];
+
+      const all: PRWithMeta[] = rawPRs.map((pr) => {
+        const repo = repoFromUrl(pr.repository_url);
+        const prKey = `${repo}#${pr.number}`;
+        return {
+          ...pr,
+          prKey,
+          repo,
+          isMerged: !!pr.pull_request?.merged_at,
+          flagged: flaggedMap.get(prKey),
+          approved: reviewedIds.has(prKey) && !flaggedMap.has(prKey),
+        };
+      });
+
+      // Sort: pending first → approved → flagged, newest within each group
+      all.sort((a, b) => {
+        const priority = (pr: PRWithMeta) =>
+          pr.flagged ? 2 : pr.approved ? 1 : 0;
+        const pa = priority(a), pb = priority(b);
+        if (pa !== pb) return pa - pb;
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      });
+
+      setQueuePRs(all);
+      setProgress({ done: data.stats?.cachedStudents ?? students.length, total: data.stats?.totalStudents ?? students.length });
+    } catch (err: any) {
+      setError(err.message || 'Failed to load queue');
     }
 
-    // Sort: pending first → approved → flagged, newest within each group
-    all.sort((a, b) => {
-      const priority = (pr: PRWithMeta) =>
-        pr.flagged ? 2 : pr.approved ? 1 : 0;
-      const pa = priority(a), pb = priority(b);
-      if (pa !== pb) return pa - pb;
-      return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-    });
-    setQueuePRs(all);
     setLoaded(true);
     setLoading(false);
   }, [students, reviewedIds, flaggedMap, setQueuePRs]);
@@ -330,7 +333,7 @@ function QueueTab({ students, reviewedIds, flaggedMap, onFlag, onApprove, onUnap
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
               </svg>
-              {progress.done}/{progress.total}
+              Loading from cache…
             </>
           ) : (
             <>
@@ -394,7 +397,7 @@ function QueueTab({ students, reviewedIds, flaggedMap, onFlag, onApprove, onUnap
         <div className="text-center py-24 text-white/20">
           <div className="text-5xl mb-4">📥</div>
           <p className="text-base font-medium text-white/30 mb-1">Queue not loaded yet</p>
-          <p className="text-sm">Click "Load Queue" to fetch all contributor PRs</p>
+          <p className="text-sm">Click &quot;Load Queue&quot; to fetch all contributor PRs from server cache</p>
         </div>
       )}
 
