@@ -468,14 +468,36 @@ export async function getAllStudentSummaries(
         summary.campus = student.campus;
         summaries.push(summary);
       } else {
-        uncachedStudents.push(student);
+        const placeholder: StudentSummary = {
+          profile: {
+            login: student.github,
+            name: student.github,
+            avatar_url: `https://avatars.githubusercontent.com/${student.github}?s=100`,
+            html_url: `https://github.com/${student.github}`,
+            bio: null,
+            public_repos: 0,
+            followers: 0,
+            following: 0,
+            company: null,
+            location: null,
+            blog: null,
+            twitter_username: null,
+            created_at: new Date().toISOString(),
+          },
+          totalPRs: 0,
+          mergedPRs: 0,
+          openPRs: 0,
+          closedPRs: 0,
+          scoreMergedPRs: 0,
+          issuesCount: 0,
+          year: student.year,
+          campus: student.campus,
+        };
+        summaries.push(placeholder);
       }
     }
 
-    // Every student resolved from cache — no API calls needed
-    if (uncachedStudents.length === 0) {
-      return summaries.sort((a, b) => b.scoreMergedPRs - a.scoreMergedPRs);
-    }
+    return summaries.sort((a, b) => b.scoreMergedPRs - a.scoreMergedPRs);
   }
 
   // ── Phase 2: Batch-query GitHub for remaining (or all) students ────

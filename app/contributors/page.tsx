@@ -150,9 +150,9 @@ function ContributorCard({
 export default async function ContributorsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ period?: string; from?: string; to?: string; search?: string }>;
+  searchParams: Promise<{ period?: string; from?: string; to?: string; search?: string; year?: string; campus?: string }>;
 }) {
-  const { period = 'all', from, to, search = '' } = await searchParams;
+  const { period = 'all', from, to, search = '', year = '', campus = '' } = await searchParams;
   const dateQuery = buildDateQuery(period, from, to);
   const students = await getStudentsKV();
 
@@ -218,17 +218,25 @@ export default async function ContributorsPage({
     allSummaries = [...allSummaries].sort((a, b) => b.scoreMergedPRs - a.scoreMergedPRs);
   }
 
-  const summaries = search
-    ? allSummaries.filter((s) => {
+  const summaries = allSummaries.filter((s) => {
+    // Text search filter
+    if (search) {
       const q = search.toLowerCase();
-      return (
+      const matchesText =
         s.profile.login.toLowerCase().includes(q) ||
-        (s.profile.name ?? '').toLowerCase().includes(q)
-      );
-    })
-    : allSummaries;
-  const totalPRs = allSummaries.reduce((s, c) => s + c.totalPRs, 0);
-  const totalMerged = allSummaries.reduce((s, c) => s + c.mergedPRs, 0);
+        (s.profile.name ?? '').toLowerCase().includes(q) ||
+        (s.year ?? '').toLowerCase().includes(q) ||
+        (s.campus ?? '').toLowerCase().includes(q);
+      if (!matchesText) return false;
+    }
+    // Year filter
+    if (year && s.year !== year) return false;
+    // Campus filter
+    if (campus && s.campus !== campus) return false;
+    return true;
+  });
+  const totalPRs = summaries.reduce((s, c) => s + c.totalPRs, 0);
+  const totalMerged = summaries.reduce((s, c) => s + c.mergedPRs, 0);
 
   return (
     <main className="min-h-screen bg-[#030712]">

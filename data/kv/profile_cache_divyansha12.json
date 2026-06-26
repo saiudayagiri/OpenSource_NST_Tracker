@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T13:25:21.958Z",
+    "cachedAt": "2026-06-25T17:16:02.941Z",
     "profile": {
       "login": "divyansha12",
       "id": 227677748,
@@ -2825,6 +2825,80 @@
     ],
     "issues": [
       {
+        "url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319",
+        "repository_url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager",
+        "labels_url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319/comments",
+        "events_url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319/events",
+        "html_url": "https://github.com/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319",
+        "id": 4744359838,
+        "node_id": "I_kwDOSkvZZ88AAAABGskvng",
+        "number": 319,
+        "title": "Security Bug: HMAC Signature Validation Completely Bypassed in HmacAuthenticationFilter",
+        "user": {
+          "login": "divyansha12",
+          "id": 227677748,
+          "node_id": "U_kgDODZIWNA",
+          "avatar_url": "https://avatars.githubusercontent.com/u/227677748?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/divyansha12",
+          "html_url": "https://github.com/divyansha12",
+          "followers_url": "https://api.github.com/users/divyansha12/followers",
+          "following_url": "https://api.github.com/users/divyansha12/following{/other_user}",
+          "gists_url": "https://api.github.com/users/divyansha12/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/divyansha12/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/divyansha12/subscriptions",
+          "organizations_url": "https://api.github.com/users/divyansha12/orgs",
+          "repos_url": "https://api.github.com/users/divyansha12/repos",
+          "events_url": "https://api.github.com/users/divyansha12/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/divyansha12/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [],
+        "state": "open",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 0,
+        "created_at": "2026-06-25T13:44:06Z",
+        "updated_at": "2026-06-25T13:45:53Z",
+        "closed_at": null,
+        "assignee": null,
+        "author_association": "NONE",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### Describe the bug\nThe project implements HMAC authentication and replay protection filter at `HmacAuthenticationFilter.java` for `/api/voice/command` endpoints. While the filter correctly checks for the presence of headers, timestamp expiration, and nonce uniqueness, it **completely fails to verify the actual HMAC signature** (`X-Signature` header) against the computed signature. \n\nThe `SignatureValidator` dependency is injected into the filter, but its signature validation/generation method is never invoked. This means anyone can send an arbitrary or empty `X-Signature` header, and the request will be successfully processed as long as the timestamp and nonce are valid.\n\n### Location of the Bug\nIn `com.vcsm.security.hmac.HmacAuthenticationFilter`:\n- The filter extracts `X-Signature` header:\n```java\nString signature = request.getHeader(\"X-Signature\");\n```\n- It performs null checks, timestamp validity checks, and nonce checks, but then goes straight to calling the downstream filter:\n```java\nnonceCacheService.save(nonce);\nfilterChain.doFilter(request, response);\n```\n- No signature verification using `SignatureValidator` ever takes place.\n\n### Expected Behavior\nThe filter must compute the expected HMAC signature of the request payload using `SignatureValidator.generateSignature(...)` and verify that it matches the incoming `X-Signature` header. If it does not match, it must return a `401 Unauthorized` response.\n\n### Proposed Solution\n1. Introduce a custom `CachedBodyHttpServletRequestWrapper` extending `HttpServletRequestWrapper` to cache the request body so it can be read multiple times (once for validation and once in the controllers).\n2. Inside `HmacAuthenticationFilter`, wrap the request in the wrapper.\n3. Compute the signature using:\n   - HTTP Method\n   - Request URI Path\n   - Request Body\n   - `X-Timestamp`\n   - `X-Nonce`\n4. Compare the computed signature with the `X-Signature` header.\n5. If match is successful, forward the wrapped request to `filterChain.doFilter`.\n\n---\n#gssoc #gssoc-bug #security #bug\n@ArpitaVerma16 , I would like to work on this issue as part of GSSoC. Please assign this issue to me. Thank you!\n\n",
+        "reactions": {
+          "url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ArpitaVerma16/Voice-Driven-Virtual-Customer-Success-Manager/issues/319/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "pinned_comment": null,
+        "score": 1
+      },
+      {
         "url": "https://api.github.com/repos/ronisarkarexe/story-spark-ai/issues/3814",
         "repository_url": "https://api.github.com/repos/ronisarkarexe/story-spark-ai",
         "labels_url": "https://api.github.com/repos/ronisarkarexe/story-spark-ai/issues/3814/labels{/name}",
@@ -4122,9 +4196,9 @@
         "locked": false,
         "assignees": [],
         "milestone": null,
-        "comments": 1,
+        "comments": 2,
         "created_at": "2026-06-14T09:35:22Z",
-        "updated_at": "2026-06-17T22:42:29Z",
+        "updated_at": "2026-06-25T13:56:22Z",
         "closed_at": null,
         "assignee": null,
         "author_association": "CONTRIBUTOR",
@@ -4976,5 +5050,5 @@
       }
     ]
   },
-  "expiresAt": 1784985921958
+  "expiresAt": 1784999762941
 }

@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T13:25:37.000Z",
+    "cachedAt": "2026-06-26T03:49:07.652Z",
     "profile": {
       "login": "sarthak-gupta229",
       "id": 215051844,
@@ -34,7 +34,7 @@
       "followers": 5,
       "following": 14,
       "created_at": "2025-06-05T18:34:07Z",
-      "updated_at": "2026-06-20T18:53:43Z"
+      "updated_at": "2026-06-25T15:19:21Z"
     },
     "prs": [
       {
@@ -1638,5 +1638,5 @@
       }
     ]
   },
-  "expiresAt": 1784985937000
+  "expiresAt": 1785037747654
 }

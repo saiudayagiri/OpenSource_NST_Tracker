@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T13:25:21.888Z",
+    "cachedAt": "2026-06-25T17:16:02.709Z",
     "profile": {
       "login": "soham-founder",
       "avatar_url": "https://github.com/soham-founder.png",
@@ -14,10 +14,10 @@
       "location": null,
       "blog": null,
       "twitter_username": null,
-      "created_at": "2026-06-25T13:25:02.943Z"
+      "created_at": "2026-06-25T16:43:07.569Z"
     },
     "prs": [],
     "issues": []
   },
-  "expiresAt": 1784985921888
+  "expiresAt": 1784999762709
 }

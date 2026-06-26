@@ -2,6 +2,7 @@ import { getProgramMeta, type PersonEntry } from '@/lib/data';
 import { getAchieversKV } from '@/lib/kv-achievers';
 import { getStudentProfile, type GitHubUser } from '@/lib/github';
 import { readProfileCache } from '@/lib/profile-cache';
+import { getStudentsKV, type Student } from '@/lib/kv-students';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -38,10 +39,12 @@ function InitialsAvatar({ name, size = 56 }: { name: string; size?: number }) {
 function AchieverCard({
   entry,
   profile,
+  student,
   index,
 }: {
   entry: PersonEntry;
   profile: GitHubUser | null;
+  student?: Student;
   index: number;
 }) {
   const displayName = profile?.name ?? entry.name ?? entry.github;
@@ -76,6 +79,20 @@ function AchieverCard({
             {displayName}
           </h3>
           <p className="text-white/35 text-xs mt-0.5">@{handle}</p>
+          {(student?.year || student?.campus) && (
+            <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+              {student.year && (
+                <span className="text-[9px] px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20 font-medium">
+                  {student.year}
+                </span>
+              )}
+              {student.campus && (
+                <span className="text-[9px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20 font-medium">
+                  {student.campus}
+                </span>
+              )}
+            </div>
+          )}
           {bio && (
             <p className="text-white/40 text-xs mt-1.5 line-clamp-2 leading-relaxed">{bio}</p>
           )}
@@ -126,7 +143,7 @@ function AchieverCard({
 }
 
 export default async function AchieversPage() {
-  const entries = await getAchieversKV();
+  const [entries, students] = await Promise.all([getAchieversKV(), getStudentsKV()]);
 
   const achievers = await Promise.all(
     entries.map(async (e) => {
@@ -141,9 +158,11 @@ export default async function AchieversPage() {
       } catch (err) {
         console.error(`Failed to load profile for achiever ${e.github}:`, err);
       }
+      const student = students.find((s) => s.github.toLowerCase() === e.github.toLowerCase());
       return {
         entry: e,
         profile,
+        student,
       };
     })
   );
@@ -221,8 +240,8 @@ export default async function AchieversPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {achievers.map(({ entry, profile }, index) => (
-              <AchieverCard key={entry.github} entry={entry} profile={profile} index={index} />
+            {achievers.map(({ entry, profile, student }, index) => (
+              <AchieverCard key={entry.github} entry={entry} profile={profile} student={student} index={index} />
             ))}
           </div>
         )}

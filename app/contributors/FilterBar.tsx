@@ -12,11 +12,16 @@ const PRESETS = [
   { label: '3 Months', value: '3months' },
 ];
 
+const YEARS = ['1st year', '2nd year', '3rd year', '4th year'] as const;
+const CAMPUSES = ['ADYPU', 'Rishihood', 'SVYASA'] as const;
+
 export function FilterBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const period = searchParams.get('period') ?? 'all';
   const searchQuery = searchParams.get('search') ?? '';
+  const yearParam = searchParams.get('year') ?? '';
+  const campusParam = searchParams.get('campus') ?? '';
 
   const [showCustom, setShowCustom] = useState(period === 'custom');
   const [from, setFrom] = useState(searchParams.get('from') ?? '');
@@ -38,12 +43,21 @@ export function FilterBar() {
 
   function buildParams(overrides: Record<string, string>) {
     const p = new URLSearchParams();
-    const cur = { period, from: searchParams.get('from') ?? '', to: searchParams.get('to') ?? '', search };
+    const cur = {
+      period,
+      from: searchParams.get('from') ?? '',
+      to: searchParams.get('to') ?? '',
+      search,
+      year: yearParam,
+      campus: campusParam,
+    };
     const merged = { ...cur, ...overrides };
     if (merged.period && merged.period !== 'all') p.set('period', merged.period);
     if (merged.from) p.set('from', merged.from);
     if (merged.to) p.set('to', merged.to);
     if (merged.search) p.set('search', merged.search);
+    if (merged.year) p.set('year', merged.year);
+    if (merged.campus) p.set('campus', merged.campus);
     return p.toString();
   }
 
@@ -59,6 +73,8 @@ export function FilterBar() {
     const p = new URLSearchParams({ period: 'custom', from });
     if (to) p.set('to', to);
     if (search) p.set('search', search);
+    if (yearParam) p.set('year', yearParam);
+    if (campusParam) p.set('campus', campusParam);
     router.push(`/contributors?${p.toString()}`, { scroll: false });
     setShowCustom(false);
   }
@@ -72,7 +88,19 @@ export function FilterBar() {
     }, 350);
   }
 
+  function handleYearChange(value: string) {
+    const qs = buildParams({ year: value });
+    router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+  }
+
+  function handleCampusChange(value: string) {
+    const qs = buildParams({ campus: value });
+    router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+  }
+
   const isCustomActive = period === 'custom';
+
+  const hasActiveFilters = period !== 'all' || search || yearParam || campusParam;
 
   return (
     <div className="max-w-6xl mx-auto px-4 pb-6">
@@ -84,7 +112,7 @@ export function FilterBar() {
           </svg>
           <input
             type="text"
-            placeholder="Search by name…"
+            placeholder="Search by name or username…"
             value={search}
             onChange={(e) => handleSearch(e.target.value)}
             className="w-full bg-white/[0.04] border border-white/[0.09] text-white/70 placeholder-white/20 text-sm rounded-full pl-9 pr-4 py-1.5 focus:outline-none focus:border-purple-500/40 focus:bg-white/[0.06] transition-all"
@@ -99,6 +127,48 @@ export function FilterBar() {
               </svg>
             </button>
           )}
+        </div>
+
+        {/* Year filter */}
+        <div className="relative">
+          <select
+            value={yearParam}
+            onChange={(e) => handleYearChange(e.target.value)}
+            className={`appearance-none cursor-pointer px-4 py-1.5 pr-8 rounded-full text-sm font-medium transition-all border focus:outline-none ${
+              yearParam
+                ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
+                : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
+            }`}
+          >
+            <option value="" className="bg-[#0f1729] text-white/70">All Years</option>
+            {YEARS.map((y) => (
+              <option key={y} value={y} className="bg-[#0f1729] text-white/70">{y}</option>
+            ))}
+          </select>
+          <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+
+        {/* Campus filter */}
+        <div className="relative">
+          <select
+            value={campusParam}
+            onChange={(e) => handleCampusChange(e.target.value)}
+            className={`appearance-none cursor-pointer px-4 py-1.5 pr-8 rounded-full text-sm font-medium transition-all border focus:outline-none ${
+              campusParam
+                ? 'bg-blue-500/20 border-blue-500/40 text-blue-300'
+                : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
+            }`}
+          >
+            <option value="" className="bg-[#0f1729] text-white/70">All Campuses</option>
+            {CAMPUSES.map((c) => (
+              <option key={c} value={c} className="bg-[#0f1729] text-white/70">{c}</option>
+            ))}
+          </select>
+          <svg className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-white/30 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
 
         {/* Divider */}
@@ -171,7 +241,7 @@ export function FilterBar() {
       )}
 
       {/* Active filter labels */}
-      {(period !== 'all' || search) && (
+      {hasActiveFilters && (
         <p className="text-white/25 text-xs mt-3 flex flex-wrap gap-x-2 items-center">
           {period !== 'all' && (
             <span>
@@ -187,8 +257,24 @@ export function FilterBar() {
               }
             </span>
           )}
-          {period !== 'all' && search && <span className="text-white/15">·</span>}
-          {search && <span>Searching &ldquo;{search}&rdquo;</span>}
+          {yearParam && (
+            <>
+              {period !== 'all' && <span className="text-white/15">·</span>}
+              <span className="text-purple-400/60">{yearParam}</span>
+            </>
+          )}
+          {campusParam && (
+            <>
+              {(period !== 'all' || yearParam) && <span className="text-white/15">·</span>}
+              <span className="text-blue-400/60">{campusParam}</span>
+            </>
+          )}
+          {search && (
+            <>
+              {(period !== 'all' || yearParam || campusParam) && <span className="text-white/15">·</span>}
+              <span>Searching &ldquo;{search}&rdquo;</span>
+            </>
+          )}
           <span className="text-white/15">·</span>
           <button
             onClick={() => { setSearch(''); router.push('/contributors', { scroll: false }); }}

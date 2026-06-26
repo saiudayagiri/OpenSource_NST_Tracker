@@ -47,9 +47,8 @@ export default async function Home() {
           </span>
         </h1>
 
-        <p className="text-white/40 text-lg mb-10 max-w-lg leading-relaxed">
-          Every PR merged, every issue closed — tracked, celebrated, and remembered.
-          NST&apos;s open source contributions, all in one place.
+        <p className="text-white/40 text-lg mb-10 max-w-xl leading-relaxed">
+          Tracking every pull request merged and issue resolved. Celebrating the collective impact of Newton School of Technology&apos;s open-source developer community.
         </p>
 
         <div className="flex flex-wrap gap-3 justify-center">

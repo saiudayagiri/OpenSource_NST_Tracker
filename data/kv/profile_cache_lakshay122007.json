@@ -1,6 +1,6 @@
 {
   "value": {
-    "cachedAt": "2026-06-25T13:29:45.666Z",
+    "cachedAt": "2026-06-25T16:58:28.367Z",
     "profile": {
       "login": "lakshay122007",
       "id": 210226282,
@@ -37,6 +37,113 @@
       "updated_at": "2026-06-24T03:40:29Z"
     },
     "prs": [
+      {
+        "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197",
+        "repository_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot",
+        "labels_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197/comments",
+        "events_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197/events",
+        "html_url": "https://github.com/ionfwsrijan/PatchPilot/pull/197",
+        "id": 4745027450,
+        "node_id": "PR_kwDORnmr5s7qnlLP",
+        "number": 197,
+        "title": "add Ollama health check endpoint",
+        "user": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 11096194161,
+            "node_id": "LA_kwDORnmr5s8AAAAClWJ8cQ",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/ml",
+            "name": "ml",
+            "color": "2e9ce1",
+            "default": false,
+            "description": "ML related issues"
+          },
+          {
+            "id": 11096198259,
+            "node_id": "LA_kwDORnmr5s8AAAAClWKMcw",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/backend",
+            "name": "backend",
+            "color": "429e97",
+            "default": false,
+            "description": "Backend issues"
+          },
+          {
+            "id": 11096232890,
+            "node_id": "LA_kwDORnmr5s8AAAAClWMTug",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/SSoC26",
+            "name": "SSoC26",
+            "color": "5c11ed",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11182607778,
+            "node_id": "LA_kwDORnmr5s8AAAACmokNog",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/feature",
+            "name": "feature",
+            "color": "842e7e",
+            "default": false,
+            "description": "New feature"
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 3,
+        "created_at": "2026-06-25T15:08:55Z",
+        "updated_at": "2026-06-25T15:09:31Z",
+        "closed_at": null,
+        "assignee": null,
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "draft": false,
+        "pull_request": {
+          "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/pulls/197",
+          "html_url": "https://github.com/ionfwsrijan/PatchPilot/pull/197",
+          "diff_url": "https://github.com/ionfwsrijan/PatchPilot/pull/197.diff",
+          "patch_url": "https://github.com/ionfwsrijan/PatchPilot/pull/197.patch",
+          "merged_at": null
+        },
+        "body": "> **Before opening:** make sure there is an issue tracking this work, and link it below. PRs without a linked issue may be closed without review.\r\n\r\n## Linked issue\r\n\r\nCloses #196 \r\n\r\n## What this PR does\r\n\r\nThis PR introduces a dedicated health check endpoint (`GET /api/health/ollama`) to monitor the local Ollama LLM service. It safely wraps the `httpx` request to gracefully catch connection refusals and timeouts, ensuring the backend returns a clean `available: false` JSON payload instead of crashing with a `500 Internal Server Error`.\r\n\r\n## Type of change\r\n\r\n- [ ] Bug fix\r\n- [x] New feature\r\n- [ ] ML model / training pipeline\r\n- [ ] Refactor (no behaviour change)\r\n- [ ] Documentation\r\n- [ ] Tests only\r\n\r\n## ML tier (if applicable)\r\n\r\n- [ ] Tier 1 — Triage\r\n- [ ] Tier 2 — Predictive\r\n- [x] Tier 3 — Autonomous\r\n- [ ] Not ML-related\r\n\r\n## Stack affected\r\n\r\n- [x] Backend\r\n- [ ] Frontend\r\n- [ ] Both\r\n\r\n---\r\n\r\n## Changes\r\n\r\n### Backend\r\n\r\n- Added `GET /api/health/ollama` route in `app/main.py` with custom exception handling for timeouts/refusals.\r\n- Created `tests/test_health.py` utilizing `AsyncMock` to simulate `httpx.AsyncClient` context managers for complete test coverage of both online and offline states.\r\n\r\n### Frontend\r\n\r\n-\r\n\r\n### New dependencies\r\n\r\n-\r\n\r\n### Database / schema changes\r\n\r\n-\r\n\r\n---\r\n\r\n## Testing\r\n\r\n**How did you test this?**\r\n\r\nExecuted the pytest suite (`python -m pytest tests/test_health.py --cov=app`) which validates successful JSON parsing of model tags, as well as fallback behavior for `httpx.ConnectError` and 404/500 status codes. All tests pass with 100% green coverage.\r\n\r\n**Checklist**\r\n\r\n- [x] Tested locally end-to-end (upload ZIP or GitHub URL → scan → findings returned correctly)\r\n- [x] New ML model falls back gracefully when model file is absent\r\n- [x] No new `console.error` or unhandled Python exceptions introduced\r\n- [x] Added or updated tests where applicable\r\n- [ ] `requirements.txt` / `package.json` updated if new dependencies added\r\n- [ ] New model files (`.pkl`, `.pt`, etc.) are gitignored, not committed\r\n\r\n---\r\n\r\n## Anything reviewers should focus on\r\n\r\nThe test file uses a custom `create_mock_client` helper to properly mock the async context manager (`async with httpx.AsyncClient()`) so that FastAPI resolves the coroutine safely in the test client.\r\n\r\n## Screenshots (if UI changed)",
+        "reactions": {
+          "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/197/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "score": 1
+      },
       {
         "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/194",
         "repository_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot",
@@ -116,20 +223,29 @@
             "description": ""
           },
           {
-            "id": 11324193992,
-            "node_id": "LA_kwDORnmr5s8AAAACovl8yA",
-            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/under-review",
-            "name": "under-review",
-            "color": "a4a58f",
+            "id": 11172446362,
+            "node_id": "LA_kwDORnmr5s8AAAACme4Amg",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/Medium",
+            "name": "Medium",
+            "color": "877e1f",
+            "default": false,
+            "description": "Medium difficulty"
+          },
+          {
+            "id": 11324816225,
+            "node_id": "LA_kwDORnmr5s8AAAACowL7YQ",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/approved",
+            "name": "approved",
+            "color": "2ac31f",
             "default": false,
             "description": ""
           },
           {
-            "id": 11326208057,
-            "node_id": "LA_kwDORnmr5s8AAAACoxg4OQ",
-            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/changes-required",
-            "name": "changes-required",
-            "color": "8d6437",
+            "id": 11324817735,
+            "node_id": "LA_kwDORnmr5s8AAAACowMBRw",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/merge-ready",
+            "name": "merge-ready",
+            "color": "ee791c",
             "default": false,
             "description": ""
           },
@@ -170,7 +286,7 @@
             "description": ""
           }
         ],
-        "state": "open",
+        "state": "closed",
         "locked": false,
         "assignees": [
           {
@@ -196,10 +312,10 @@
           }
         ],
         "milestone": null,
-        "comments": 9,
+        "comments": 11,
         "created_at": "2026-06-25T11:46:29Z",
-        "updated_at": "2026-06-25T12:32:44Z",
-        "closed_at": null,
+        "updated_at": "2026-06-25T14:10:47Z",
+        "closed_at": "2026-06-25T14:10:37Z",
         "assignee": {
           "login": "lakshay122007",
           "id": 210226282,
@@ -229,7 +345,7 @@
           "html_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194",
           "diff_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194.diff",
           "patch_url": "https://github.com/ionfwsrijan/PatchPilot/pull/194.patch",
-          "merged_at": null
+          "merged_at": "2026-06-25T14:10:37Z"
         },
         "body": "> **Before opening:** make sure there is an issue tracking this work, and link it below. PRs without a linked issue may be closed without review.\r\n\r\n## Linked issue\r\n\r\nCloses #167\r\n\r\n## What this PR does\r\n\r\nThis PR fixes a critical `TypeError` during the live ML inference pipeline. Upstream scanners were occasionally returning `None` for the `ml_score`, which caused the false positive penalty calculation to crash (`None * 0.2`). This adds safe type coalescence and adjusts the probability threshold to properly downrank findings based on our current dataset size.\r\n\r\n## Type of change\r\n\r\n- [x] Bug fix\r\n- [ ] New feature\r\n- [ ] ML model / training pipeline\r\n- [ ] Refactor (no behaviour change)\r\n- [ ] Documentation\r\n- [ ] Tests only\r\n\r\n## ML tier (if applicable)\r\n\r\n- [x] Tier 1 — Triage\r\n- [ ] Tier 2 — Predictive\r\n- [ ] Tier 3 — Autonomous\r\n- [ ] Not ML-related\r\n\r\n## Stack affected\r\n\r\n- [x] Backend\r\n- [ ] Frontend\r\n- [ ] Both\r\n\r\n---\r\n\r\n## Changes\r\n\r\n### Backend\r\n\r\n- Added fallback logic in `app/ml/fp_predictor.py` to safely cast `None` to `1.0` before multiplication.\r\n- Adjusted the FP penalty threshold boundary to `0.5` to accommodate smaller training sets.\r\n- Patched test suite mocks in `tests/test_deduplicator.py` to prevent false positive pipeline crashes during unrelated tests.\r\n\r\n### Frontend\r\n\r\n- N/A\r\n\r\n### New dependencies\r\n\r\n- N/A\r\n\r\n### Database / schema changes\r\n\r\n- N/A\r\n\r\n---\r\n\r\n## Testing\r\n\r\n**How did you test this?**\r\n\r\nTested locally by triggering a fresh scan from the UI. Monitored the FastAPI logs to ensure the inference engine correctly calculated probabilities and applied the `0.2` penalty to the `ml_score` without throwing exceptions. Validated that the UI successfully rendered the `20%` severity badges for false positives. Passed the entire `pytest` suite and `ruff` formatting checks.\r\n\r\n**Checklist**\r\n\r\n- [x] Tested locally end-to-end (upload ZIP or GitHub URL → scan → findings returned correctly)\r\n- [x] New ML model falls back gracefully when model file is absent\r\n- [x] No new `console.error` or unhandled Python exceptions introduced\r\n- [x] Added or updated tests where applicable\r\n- [ ] `requirements.txt` / `package.json` updated if new dependencies added\r\n- [x] New model files (`.pkl`, `.pt`, etc.) are gitignored, not committed\r\n\r\n---\r\n\r\n## Anything reviewers should focus on\r\n\r\nPlease review the `NoneType` fallback logic in the `fp_predictor.py` iteration loop. \r\n\r\n*(Note: There is an existing frontend bug where the Confidence table column still says \"100%\" despite the backend correctly sending `0.2`—which renders correctly inside the severity badge. That frontend UI fix is out of scope for this strictly backend PR).*\r\n\r\n## Screenshots (if UI changed)\r\n\r\nN/A",
         "reactions": {
@@ -18415,6 +18531,345 @@
     ],
     "issues": [
       {
+        "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961",
+        "repository_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse",
+        "labels_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961/labels{/name}",
+        "comments_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961/comments",
+        "events_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961/events",
+        "html_url": "https://github.com/Eshajha19/Algo-Infinity-Verse/issues/961",
+        "id": 4745138692,
+        "node_id": "I_kwDOSLnqN88AAAABGtUSBA",
+        "number": 961,
+        "title": "[Feature]: Graph Algorithm Race — BFS vs DFS vs Dijkstra vs A* Side by Side",
+        "user": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 11054151626,
+            "node_id": "LA_kwDOSLnqN88AAAACkuD3yg",
+            "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/labels/feature-request",
+            "name": "feature-request",
+            "color": "0052cc",
+            "default": false,
+            "description": "Request for a new feature"
+          },
+          {
+            "id": 11054151712,
+            "node_id": "LA_kwDOSLnqN88AAAACkuD4IA",
+            "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/labels/SSoC26",
+            "name": "SSoC26",
+            "color": "eabe2e",
+            "default": false,
+            "description": ""
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2026-06-25T15:23:06Z",
+        "updated_at": "2026-06-25T15:23:26Z",
+        "closed_at": null,
+        "assignee": null,
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### Problem description\n\n## Problem Description\nStudents learn BFS, DFS, Dijkstra's, and A* separately but never see them run on the same graph simultaneously. Understanding why Dijkstra beats DFS on weighted graphs, or why A* beats Dijkstra with a heuristic, requires\nseeing them race.\n\n### Proposed solution\n\n## Proposed Solution\nCreate an interactive Graph Algorithm Race where 2–4 algorithms run\nsimultaneously on the same graph:\n- Draw a custom graph (add nodes, weighted edges)\n- Select source and target node\n- Select which algorithms to race (2–4)\n- All algorithms animate simultaneously, step-locked\n- Each algorithm has its own color-coded traversal path\n- Live metrics panel: nodes visited, edges relaxed, path cost, steps taken\n\n## Features\n- Canvas graph editor: click to add nodes, drag to add weighted edges\n- Algorithm selector: BFS, DFS, Dijkstra's, A* (Manhattan/Euclidean heuristic)\n- Synchronized step mode — all algorithms advance one step at a time\n- Play / Pause / Step / Reset + speed slider\n- Winner announcement: first to reach target\n- Results table: path cost, nodes visited, steps for each algorithm\n- 4 preset graphs: unweighted, weighted, dense, sparse\n- Path replay after completion\n\n## Acceptance Criteria\n- All 4 algorithms run correctly and simultaneously\n- Synchronized step mode works\n- Results table shows correct metrics\n- Custom graph editing works\n- No console errors\n- Mobile responsive\n\n## Difficulty\nHard \n\n\n### Alternatives considered\n\n_No response_\n\n### Additional context\n\n_No response_",
+        "reactions": {
+          "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/961/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "pinned_comment": null,
+        "score": 1
+      },
+      {
+        "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960",
+        "repository_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse",
+        "labels_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960/labels{/name}",
+        "comments_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960/comments",
+        "events_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960/events",
+        "html_url": "https://github.com/Eshajha19/Algo-Infinity-Verse/issues/960",
+        "id": 4745112947,
+        "node_id": "I_kwDOSLnqN88AAAABGtStcw",
+        "number": 960,
+        "title": "[Feature]: String Pattern Matching Visualizer — KMP, Z-Algorithm, Rabin-Karp",
+        "user": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 11054151626,
+            "node_id": "LA_kwDOSLnqN88AAAACkuD3yg",
+            "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/labels/feature-request",
+            "name": "feature-request",
+            "color": "0052cc",
+            "default": false,
+            "description": "Request for a new feature"
+          },
+          {
+            "id": 11054151712,
+            "node_id": "LA_kwDOSLnqN88AAAACkuD4IA",
+            "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/labels/SSoC26",
+            "name": "SSoC26",
+            "color": "eabe2e",
+            "default": false,
+            "description": ""
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignees": [],
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2026-06-25T15:20:09Z",
+        "updated_at": "2026-06-25T15:23:40Z",
+        "closed_at": null,
+        "assignee": null,
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "### Problem description\n\n## Problem Description\nString pattern matching algorithms (KMP, Z-algorithm, Rabin-Karp) are heavily tested at top companies but have no interactive visual representation in the repo. Students memorize them without understanding how the failure function or rolling hash actually behaves.\n\n### Proposed solution\n\n## Proposed Solution\nCreate an interactive String Algorithm Visualizer with:\n- KMP: animate failure function (prefix table) construction + pattern search\n- Z-Algorithm: animate Z-array construction with match window\n- Rabin-Karp: animate rolling hash computation and collision detection\n\n## Features\n- Text and pattern input fields\n- Algorithm selector (KMP / Z / Rabin-Karp)\n- Step-by-step traversal with character-level highlighting\n- Failure function / Z-array / hash table displayed and updated live\n- Match found → highlight green, mismatch → highlight red\n- Play / Pause / Step / Reset + speed control\n- Comparison table: naive O(nm) vs each algorithm O(n+m)\n- 5 preset text/pattern examples\n\n## Acceptance Criteria\n- All 3 algorithms animate correctly\n- Failure table / Z-array updates in sync with traversal\n- Correct match positions highlighted\n- No console errors\n- Mobile responsive\n\n## Difficulty\nHard\n\n### Alternatives considered\n\n_No response_\n\n### Additional context\n\n_No response_",
+        "reactions": {
+          "url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/Eshajha19/Algo-Infinity-Verse/issues/960/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "pinned_comment": null,
+        "score": 1
+      },
+      {
+        "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196",
+        "repository_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot",
+        "labels_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196/labels{/name}",
+        "comments_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196/comments",
+        "events_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196/events",
+        "html_url": "https://github.com/ionfwsrijan/PatchPilot/issues/196",
+        "id": 4744075349,
+        "node_id": "I_kwDORnmr5s8AAAABGsTYVQ",
+        "number": 196,
+        "title": "[Feature] Add Ollama health check endpoint",
+        "user": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "labels": [
+          {
+            "id": 11096198259,
+            "node_id": "LA_kwDORnmr5s8AAAAClWKMcw",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/backend",
+            "name": "backend",
+            "color": "429e97",
+            "default": false,
+            "description": "Backend issues"
+          },
+          {
+            "id": 11096232890,
+            "node_id": "LA_kwDORnmr5s8AAAAClWMTug",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/SSoC26",
+            "name": "SSoC26",
+            "color": "5c11ed",
+            "default": false,
+            "description": ""
+          },
+          {
+            "id": 11172446362,
+            "node_id": "LA_kwDORnmr5s8AAAACme4Amg",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/Medium",
+            "name": "Medium",
+            "color": "877e1f",
+            "default": false,
+            "description": "Medium difficulty"
+          },
+          {
+            "id": 11332595178,
+            "node_id": "LA_kwDORnmr5s8AAAACo3mt6g",
+            "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/labels/assigned",
+            "name": "assigned",
+            "color": "4fefa7",
+            "default": false,
+            "description": ""
+          }
+        ],
+        "state": "open",
+        "locked": false,
+        "assignees": [
+          {
+            "login": "lakshay122007",
+            "id": 210226282,
+            "node_id": "U_kgDODIfMag",
+            "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+            "gravatar_id": "",
+            "url": "https://api.github.com/users/lakshay122007",
+            "html_url": "https://github.com/lakshay122007",
+            "followers_url": "https://api.github.com/users/lakshay122007/followers",
+            "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+            "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+            "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+            "repos_url": "https://api.github.com/users/lakshay122007/repos",
+            "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+            "type": "User",
+            "user_view_type": "public",
+            "site_admin": false
+          }
+        ],
+        "milestone": null,
+        "comments": 2,
+        "created_at": "2026-06-25T13:08:00Z",
+        "updated_at": "2026-06-25T13:56:52Z",
+        "closed_at": null,
+        "assignee": {
+          "login": "lakshay122007",
+          "id": 210226282,
+          "node_id": "U_kgDODIfMag",
+          "avatar_url": "https://avatars.githubusercontent.com/u/210226282?v=4",
+          "gravatar_id": "",
+          "url": "https://api.github.com/users/lakshay122007",
+          "html_url": "https://github.com/lakshay122007",
+          "followers_url": "https://api.github.com/users/lakshay122007/followers",
+          "following_url": "https://api.github.com/users/lakshay122007/following{/other_user}",
+          "gists_url": "https://api.github.com/users/lakshay122007/gists{/gist_id}",
+          "starred_url": "https://api.github.com/users/lakshay122007/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/lakshay122007/subscriptions",
+          "organizations_url": "https://api.github.com/users/lakshay122007/orgs",
+          "repos_url": "https://api.github.com/users/lakshay122007/repos",
+          "events_url": "https://api.github.com/users/lakshay122007/events{/privacy}",
+          "received_events_url": "https://api.github.com/users/lakshay122007/received_events",
+          "type": "User",
+          "user_view_type": "public",
+          "site_admin": false
+        },
+        "author_association": "CONTRIBUTOR",
+        "active_lock_reason": null,
+        "sub_issues_summary": {
+          "total": 0,
+          "completed": 0,
+          "percent_completed": 0
+        },
+        "issue_dependencies_summary": {
+          "blocked_by": 0,
+          "total_blocked_by": 0,
+          "blocking": 0,
+          "total_blocking": 0
+        },
+        "body": "## Summary\nAdd a dedicated backend health check endpoint to monitor the availability and loaded models of the local Ollama service.\n\n## Motivation\nAs we prepare for LLM-based patch generation, the backend will rely on a local Ollama instance running on port 11434. Currently, if the Ollama service is down, unreachable, or missing the required models, the system risks failing ungracefully during heavy inference tasks. We need a fast, reliable way for the system (and UI) to verify Ollama's availability and inventory beforehand to provide clear feedback and prevent server crashes.\n\n## Proposed solution\nImplement a new FastAPI endpoint (e.g., `GET /api/health/ollama`) that makes a lightweight request to the local Ollama tags API (`http://localhost:11434/api/tags`). \n\nThe endpoint must be wrapped in a `try/except` block to gracefully catch any connection exceptions (like timeouts or connection refused errors). It will return a standard JSON response containing:\n1. `available`: A boolean indicating if the service is reachable.\n2. `models`: A list of model names currently installed (parsed from the Ollama response).\n3. `base_url`: The URL that was pinged (e.g., `http://localhost:11434`).\n\n## ML tier (if applicable)\n- [ ] Tier 1 — Triage (severity ranking, deduplication, false positive classification)\n- [ ] Tier 2 — Predictive (fix success prediction, exploit scoring, pattern clustering)\n- [x] Tier 3 — Autonomous (LLM patch generation, self-healing pipeline)\n- [ ] Not ML-related\n\n## Alternatives considered\nWe considered letting standard LLM inference calls simply timeout if Ollama is down, but this results in poor UX, long wait times, and messy `500 Internal Server Error` traces in the backend logs. A dedicated, fail-safe health check provides a much cleaner architecture.\n\n## Acceptance criteria\n- [ ] The endpoint returns a 200 OK with `available: true` and a populated `models` list when Ollama is running normally.\n- [ ] The endpoint returns a 200 OK with `available: false` and an empty `models` list when Ollama is completely offline, throwing NO `500 Internal Server Error`s.\n- [ ] Unit tests are implemented to verify both the successful connection state and the graceful connection failure state.\n\n## Additional context\n- Ollama API documentation for tags: `http://localhost:11434/api/tags`\n- This endpoint is a strict prerequisite for building the LLM-driven remediation and patch generation engine.",
+        "reactions": {
+          "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196/reactions",
+          "total_count": 0,
+          "+1": 0,
+          "-1": 0,
+          "laugh": 0,
+          "hooray": 0,
+          "confused": 0,
+          "heart": 0,
+          "rocket": 0,
+          "eyes": 0
+        },
+        "timeline_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/196/timeline",
+        "performed_via_github_app": null,
+        "state_reason": null,
+        "pinned_comment": null,
+        "score": 1
+      },
+      {
         "url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/167",
         "repository_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot",
         "labels_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/167/labels{/name}",
@@ -18484,7 +18939,7 @@
             "description": "New feature"
           }
         ],
-        "state": "open",
+        "state": "closed",
         "locked": false,
         "assignees": [
           {
@@ -18512,8 +18967,8 @@
         "milestone": null,
         "comments": 1,
         "created_at": "2026-06-24T16:43:46Z",
-        "updated_at": "2026-06-24T16:45:53Z",
-        "closed_at": null,
+        "updated_at": "2026-06-25T14:10:38Z",
+        "closed_at": "2026-06-25T14:10:38Z",
         "assignee": {
           "login": "lakshay122007",
           "id": 210226282,
@@ -18563,7 +19018,7 @@
         },
         "timeline_url": "https://api.github.com/repos/ionfwsrijan/PatchPilot/issues/167/timeline",
         "performed_via_github_app": null,
-        "state_reason": null,
+        "state_reason": "completed",
         "pinned_comment": null,
         "score": 1
       },
@@ -24740,5 +25195,5 @@
       }
     ]
   },
-  "expiresAt": 1784986185668
+  "expiresAt": 1784998708390
 }

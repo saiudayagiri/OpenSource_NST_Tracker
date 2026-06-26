@@ -2,6 +2,7 @@ import { getProgramMeta } from '@/lib/data';
 import { getAchieverKV } from '@/lib/kv-achievers';
 import { getStudentProfile, getStudentPRs, getStudentIssues, repoFromUrl, StudentPR } from '@/lib/github';
 import { readProfileCache, writeProfileCache, isProfileFresh } from '@/lib/profile-cache';
+import { getStudentsKV } from '@/lib/kv-students';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -19,9 +20,9 @@ function formatDate(d: string) {
 
 export default async function AchieverPage({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
-
-  const entry = await getAchieverKV(username);
+  const [entry, students] = await Promise.all([getAchieverKV(username), getStudentsKV()]);
   if (!entry) notFound();
+  const student = students.find((s) => s.github.toLowerCase() === username.toLowerCase());
 
   let profile = null;
   let prs: StudentPR[] = [];
@@ -87,6 +88,20 @@ export default async function AchieverPage({ params }: { params: Promise<{ usern
             <div className="flex-1 text-center sm:text-left">
               <h1 className="text-3xl font-bold text-white">{profile.name ?? profile.login}</h1>
               <p className="text-white/40 text-sm mt-0.5">@{profile.login}</p>
+              {(student?.year || student?.campus) && (
+                <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1.5 mt-1.5">
+                  {student.year && (
+                    <span className="text-xs px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/25 text-purple-400 font-medium">
+                      🎓 {student.year}
+                    </span>
+                  )}
+                  {student.campus && (
+                    <span className="text-xs px-2.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 font-medium">
+                      📍 {student.campus}
+                    </span>
+                  )}
+                </div>
+              )}
               <p className="text-white/55 mt-3 max-w-lg leading-relaxed">
                 {entry.headline ?? profile.bio}
               </p>
