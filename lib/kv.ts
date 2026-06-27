@@ -83,16 +83,21 @@ export async function kvGet<T>(key: string): Promise<T | null> {
 
   if (url && token) {
     const result = await executeKVCommand(['GET', key]);
-    if (result === null || result === undefined) return null;
-    try {
-      return JSON.parse(result) as T;
-    } catch {
-      return result as unknown as T;
+    // If Redis has data, use it
+    if (result !== null && result !== undefined) {
+      try {
+        return JSON.parse(result) as T;
+      } catch {
+        return result as unknown as T;
+      }
     }
+    // Redis miss — fall back to disk files (deployed with the project)
+    return readDiskKV<T>(key);
   }
 
   return readDiskKV<T>(key);
 }
+
 
 export async function kvSet<T>(key: string, value: T, ttlSeconds?: number): Promise<void> {
   const url = process.env.KV_REST_API_URL;
