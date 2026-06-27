@@ -36,15 +36,6 @@ export default function RepoActivityPage() {
   const [userError, setUserError] = useState('');
   const [filterType, setFilterType] = useState<'all' | 'prs' | 'issues'>('all');
   const [period, setPeriod] = useState<'all' | '1day' | 'week' | 'month' | '2months' | '3months'>('1day');
-  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
-
-  // Fetch session on mount to check authentication state
-  useEffect(() => {
-    fetch('/api/auth/session')
-      .then((res) => res.json())
-      .then((data) => setAuthenticated(data.authenticated))
-      .catch(() => setAuthenticated(false));
-  }, []);
 
   // Lock background body scroll when contributor details modal is open
   useEffect(() => {
@@ -251,23 +242,6 @@ export default function RepoActivityPage() {
           </div>
         </div>
 
-        {/* Sign In Banner if not authenticated */}
-        {authenticated === false && (
-          <div className="bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-transparent border border-purple-500/20 rounded-2xl p-4 text-purple-300 text-sm max-w-2xl mx-auto mb-6 flex flex-wrap items-center justify-between gap-4 backdrop-blur-sm animate-in fade-in duration-300">
-            <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse flex-shrink-0" />
-              <span>
-                <strong>Rate Limit Warning:</strong> You are currently unauthenticated. Sign in to GitHub to use your high personal search limit (5,000 req/hr).
-              </span>
-            </div>
-            <a
-              href="/api/auth/github"
-              className="bg-[#161b22] border border-white/[0.08] hover:bg-[#21262d] hover:border-white/[0.15] text-white px-3.5 py-1.5 rounded-xl transition-all text-xs font-semibold shadow-md active:scale-95 shrink-0"
-            >
-              Sign In with GitHub
-            </a>
-          </div>
-        )}
 
         {error && (
           <div className="bg-red-500/10 border border-red-500/25 rounded-2xl p-4 text-red-400 text-sm max-w-2xl mx-auto mb-10 flex items-start gap-3">
