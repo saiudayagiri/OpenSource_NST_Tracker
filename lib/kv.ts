@@ -68,6 +68,7 @@ async function executeKVCommand(command: string[]): Promise<any> {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(command),
+      cache: 'no-store',
     });
     if (!res.ok) return null;
     const data = await res.json();
