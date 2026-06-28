@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useRef } from 'react';
+import { useState, useRef, useTransition } from 'react';
 
 const PRESETS = [
   { label: 'All',      value: 'all'     },
@@ -17,6 +17,7 @@ const CAMPUSES = ['ADYPU', 'Rishihood', 'SVYASA'] as const;
 
 export function FilterBar() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const period = searchParams.get('period') ?? 'all';
   const searchQuery = searchParams.get('search') ?? '';
@@ -65,9 +66,12 @@ export function FilterBar() {
     if (value === 'custom') { setShowCustom(true); return; }
     setShowCustom(false);
     const qs = buildParams({ period: value, from: '', to: '' });
-    router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    startTransition(() => {
+      router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    });
   }
 
+  // Wrapped in transition
   function applyCustom() {
     if (!from) return;
     const p = new URLSearchParams({ period: 'custom', from });
@@ -75,27 +79,38 @@ export function FilterBar() {
     if (search) p.set('search', search);
     if (yearParam) p.set('year', yearParam);
     if (campusParam) p.set('campus', campusParam);
-    router.push(`/contributors?${p.toString()}`, { scroll: false });
+    startTransition(() => {
+      router.push(`/contributors?${p.toString()}`, { scroll: false });
+    });
     setShowCustom(false);
   }
 
+  // Wrapped in transition
   function handleSearch(value: string) {
     setSearch(value);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
       const qs = buildParams({ search: value });
-      router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+      startTransition(() => {
+        router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+      });
     }, 350);
   }
 
+  // Wrapped in transition
   function handleYearChange(value: string) {
     const qs = buildParams({ year: value });
-    router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    startTransition(() => {
+      router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    });
   }
 
+  // Wrapped in transition
   function handleCampusChange(value: string) {
     const qs = buildParams({ campus: value });
-    router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    startTransition(() => {
+      router.push(qs ? `/contributors?${qs}` : '/contributors', { scroll: false });
+    });
   }
 
   const isCustomActive = period === 'custom';
@@ -107,17 +122,27 @@ export function FilterBar() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
         {/* Search input */}
         <div className="relative flex-1 min-w-[200px] max-w-sm">
-          <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/25 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+          {isPending ? (
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-purple-400 animate-spin" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+            </svg>
+          ) : (
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/25 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          )}
           <input
             type="text"
             placeholder="Search by name or username…"
             value={search}
             onChange={(e) => handleSearch(e.target.value)}
-            className="w-full bg-white/[0.04] border border-white/[0.09] text-white/70 placeholder-white/20 text-sm rounded-full pl-9 pr-4 py-1.5 focus:outline-none focus:border-purple-500/40 focus:bg-white/[0.06] transition-all"
+            disabled={isPending}
+            className={`w-full bg-white/[0.04] border border-white/[0.09] text-white/70 placeholder-white/20 text-sm rounded-full pl-9 pr-4 py-1.5 focus:outline-none focus:border-purple-500/40 focus:bg-white/[0.06] transition-all ${
+              isPending ? 'opacity-70 cursor-not-allowed' : ''
+            }`}
           />
-          {search && (
+          {search && !isPending && (
             <button
               onClick={() => handleSearch('')}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-white/25 hover:text-white/50 transition-colors"
@@ -134,11 +159,12 @@ export function FilterBar() {
           <select
             value={yearParam}
             onChange={(e) => handleYearChange(e.target.value)}
+            disabled={isPending}
             className={`appearance-none cursor-pointer px-4 py-1.5 pr-8 rounded-full text-sm font-medium transition-all border focus:outline-none ${
               yearParam
                 ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
                 : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
-            }`}
+            } ${isPending ? 'opacity-70 cursor-not-allowed' : ''} ${isPending && yearParam ? 'animate-pulse' : ''}`}
           >
             <option value="" className="bg-[#0f1729] text-white/70">All Years</option>
             {YEARS.map((y) => (
@@ -155,11 +181,12 @@ export function FilterBar() {
           <select
             value={campusParam}
             onChange={(e) => handleCampusChange(e.target.value)}
+            disabled={isPending}
             className={`appearance-none cursor-pointer px-4 py-1.5 pr-8 rounded-full text-sm font-medium transition-all border focus:outline-none ${
               campusParam
                 ? 'bg-blue-500/20 border-blue-500/40 text-blue-300'
                 : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
-            }`}
+            } ${isPending ? 'opacity-70 cursor-not-allowed' : ''} ${isPending && campusParam ? 'animate-pulse' : ''}`}
           >
             <option value="" className="bg-[#0f1729] text-white/70">All Campuses</option>
             {CAMPUSES.map((c) => (
@@ -182,11 +209,12 @@ export function FilterBar() {
               <button
                 key={value}
                 onClick={() => navigate(value)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${
+                disabled={isPending}
+                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border cursor-pointer ${
                   active
                     ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
                     : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
-                }`}
+                } ${isPending && !active ? 'opacity-50 cursor-not-allowed' : ''} ${isPending && active ? 'animate-pulse' : ''}`}
               >
                 {label}
               </button>
@@ -196,11 +224,12 @@ export function FilterBar() {
           {/* Custom pill */}
           <button
             onClick={() => navigate('custom')}
-            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${
+            disabled={isPending}
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border cursor-pointer ${
               isCustomActive || showCustom
                 ? 'bg-purple-500/20 border-purple-500/40 text-purple-300'
                 : 'bg-white/[0.03] border-white/[0.08] text-white/40 hover:text-white/70 hover:border-white/20'
-            }`}
+            } ${isPending && !isCustomActive ? 'opacity-50 cursor-not-allowed' : ''} ${isPending && isCustomActive ? 'animate-pulse' : ''}`}
           >
             Custom
           </button>
@@ -214,6 +243,7 @@ export function FilterBar() {
             type="date"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
+            disabled={isPending}
             className="bg-white/[0.05] border border-white/[0.12] text-white/70 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:border-purple-500/50 [color-scheme:dark]"
           />
           <span className="text-white/30 text-sm">→</span>
@@ -222,18 +252,20 @@ export function FilterBar() {
             value={to}
             onChange={(e) => setTo(e.target.value)}
             min={from}
+            disabled={isPending}
             className="bg-white/[0.05] border border-white/[0.12] text-white/70 text-sm rounded-lg px-3 py-1.5 focus:outline-none focus:border-purple-500/50 [color-scheme:dark]"
           />
           <button
             onClick={applyCustom}
-            disabled={!from}
-            className="px-4 py-1.5 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-full transition-colors"
+            disabled={!from || isPending}
+            className="px-4 py-1.5 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium rounded-full transition-colors cursor-pointer"
           >
             Apply
           </button>
           <button
             onClick={() => setShowCustom(false)}
-            className="text-white/30 hover:text-white/60 text-sm transition-colors"
+            disabled={isPending}
+            className="text-white/30 hover:text-white/60 text-sm transition-colors cursor-pointer"
           >
             Cancel
           </button>
@@ -277,8 +309,17 @@ export function FilterBar() {
           )}
           <span className="text-white/15">·</span>
           <button
-            onClick={() => { setSearch(''); router.push('/contributors', { scroll: false }); }}
-            className="underline hover:text-white/50 transition-colors"
+            onClick={() => { 
+              if (isPending) return;
+              setSearch(''); 
+              startTransition(() => {
+                router.push('/contributors', { scroll: false });
+              });
+            }}
+            disabled={isPending}
+            className={`underline hover:text-white/50 transition-colors cursor-pointer ${
+              isPending ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
           >
             Clear all
           </button>
