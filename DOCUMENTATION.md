@@ -301,7 +301,13 @@ The refresh mechanism went through several redesigns. Understanding *all three* 
 
 **Generation 2 (retired)**: a "batch fetch" optimization in `getAllStudentSummaries()` that combined 5 students into one GitHub search query using `is:pr (author:a OR author:b OR ... OR author:e)`, to save API calls. **This query is rejected outright by GitHub's Search API** — verified empirically: even `author:torvalds OR author:octocat` (two well-known, valid accounts) returns `422 Validation Failed`, contradicting GitHub's own documented "up to 5 operators" limit. No current code path calls this with `forceLive: true` anymore (that flag is `false` everywhere it's invoked today), but historically, when it *was* invoked live, every batch failed and any student with no prior cache got a zero-PR placeholder — in some cases written directly into their `profile_cache` entry. **This has been fixed**: `getAllStudentSummaries`'s live-fetch path now loops over students individually using the same reliable single-author search `getStudentPRs`/`getStudentIssues` already use elsewhere, at the cost of one request pair per student instead of per five.
 
-**Generation 3 (current, primary)**: `updateStaleProfiles(batchSize)` — a round-robin function that, each time it runs, picks up to `batchSize` students to refresh: first anything in the manual `refresh_queue` (populated when a rate-limited manual refresh gets deferred), then students with no cache at all, then the oldest stale (>24h) cached students. It's called by `/api/refresh/incremental`, which is hit by a GitHub Actions workflow **every 15 minutes**, refreshing **5 students per tick** (~480/day theoretical maximum). With ~1,900 tracked students, this cannot refresh the full roster within its own 24-hour staleness window — there is a structural backlog by design, not a bug. If the roster grows, either the batch size, the tick frequency, or both need to increase (headroom exists: a single token's 30 req/min ceiling supports far more than 5 students/15min if nothing else is competing for it).
+**Generation 3 (current, primary)**: `updateStaleProfiles(batchSize?)` — a round-robin function that, each time it runs, selects students to refresh: first anything in the manual `refresh_queue` (populated when a rate-limited manual refresh gets deferred), then students with no cache at all, then the oldest stale (>24h) cached students. Called with no argument by `/api/refresh/incremental` (a GitHub Actions workflow hits it every 15 minutes), it auto-scales its own batch size instead of using a fixed number:
+
+- `computeAutoBatchSize(tokenCount)` selects up to `tokenCount * PER_TOKEN_CANDIDATE_POOL` (50) candidates, capped at `MAX_TOTAL_BATCH` (400) — more tokens in the shared `github_token_pool` means more candidates picked per tick, automatically, with no code change.
+- Selected candidates are split evenly across every available token and processed **concurrently**, one group per token, each group using its own token's independent 30 req/min budget.
+- The real safety bound is **not** the batch size — it's `TICK_DEADLINE_MS` (150s), a hard wall-clock cutoff checked before starting each student within a group. Whatever a group can't finish before the deadline simply stays stale and gets picked up next tick. This was deliberately chosen over estimating "time per student" and sizing the batch to fit: per-student cost is unpredictable (`validateNewRepos`, Section 6.4, can add anywhere from 0 to many extra calls depending on how many never-before-seen repos a student's PRs touch), so a time-estimate approach was tried first and hit `FUNCTION_INVOCATION_TIMEOUT` in production.
+
+**Practical throughput**: with a single token, this refreshes on the order of ~30 students per 15-minute tick (verified: 29 students in 157.5s), i.e. roughly the whole current ~1,900-student roster every ~16 hours — down from ~3.8 days under the old fixed-batch-size-5 design. Throughput scales further, automatically, as more students log in and contribute additional OAuth tokens to the pool (Section 11.2).
 
 ### 5.5 Cache Invalidation Flow (Admin Flags a PR)
 
@@ -330,7 +336,7 @@ POST /api/admin/flag
 | Public refresh button (leaderboard, anonymous) | 5 minutes | `/api/refresh` route (`isCacheFresh`) |
 | Public refresh button (profile, anonymous) | 2 hours | `/api/refresh?username=X` route |
 | Logged-in user, either button | none | same routes, bypassed when a session cookie is present |
-| Incremental cron | 15 minutes, 5 students/tick | GitHub Actions `refresh-cache.yml` → `/api/refresh/incremental` |
+| Incremental cron | 15 minutes, auto-scaled batch (Section 5.4) | GitHub Actions `refresh-cache.yml` → `/api/refresh/incremental` |
 | GitHub Search API (unauthenticated) | 10 req/min | GitHub-enforced |
 | GitHub Search API (with a token) | 30 req/min | GitHub-enforced, and shared across **every** request using that token — see Section 11 |
 
@@ -449,7 +455,7 @@ Cache status and manual refresh trigger. See Section 5.6 for cooldown rules. `PO
 
 ### `GET /api/refresh/incremental` · `POST /api/refresh/incremental`
 
-Gated by `CRON_SECRET` (checked in `proxy.ts`, not in the route itself — see Section 11). Runs `updateStaleProfiles(5)` and patches the `all`/`week`/`month` summary caches for whichever students were touched. This is what the 15-minute GitHub Actions workflow calls.
+Gated by `CRON_SECRET` (checked in `proxy.ts`, not in the route itself — see Section 11). Runs `updateStaleProfiles()` (auto-scaled batch size, Section 5.4) and patches the `all`/`week`/`month` summary caches for whichever students were touched. This is what the 15-minute GitHub Actions workflow calls.
 
 ### `GET/POST /api/join-requests`
 
@@ -697,7 +703,7 @@ Before touching `lib/kv.ts`, `lib/profile-cache.ts`, or `lib/summary-cache.ts`:
 | Add a program style | `lib/data.ts` → `PROGRAM_MAP` |
 | Change leaderboard ranking logic | `lib/github.ts` → scoring inside `getSummaryFromCache()` / `getAllStudentSummaries()` |
 | Change cache TTLs / staleness threshold | `lib/profile-cache.ts` (TTL), `lib/github.ts` → `updateStaleProfiles` (staleness) |
-| Change incremental refresh frequency/batch size | `.github/workflows/refresh-cache.yml` (frequency), `app/api/refresh/incremental/route.ts` (batch size) |
+| Change incremental refresh frequency/batch size | `.github/workflows/refresh-cache.yml` (frequency), `lib/github.ts` → `PER_TOKEN_CANDIDATE_POOL`/`MAX_TOTAL_BATCH`/`TICK_DEADLINE_MS` (batch sizing) |
 | Change admin password logic | `lib/admin-auth.ts` + `ADMIN_PASSWORD` — import `checkAdminAuth()`, don't re-implement the cookie check |
 | Add navigation link | `app/components/Nav.tsx` |
 | Add achievement badge | `app/contributors/[username]/page.tsx` |

@@ -15,6 +15,7 @@ const LINKS = [
   { href: '/programs',     label: 'Programs'     },
   { href: '/get-started',  label: 'Get Started'  },
   { href: '/issues',       label: 'Issues'       },
+  { href: '/docs',         label: 'Docs'         },
 ];
 
 interface Session {
